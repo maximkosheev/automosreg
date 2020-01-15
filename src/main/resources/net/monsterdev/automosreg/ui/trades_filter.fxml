@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane fx:id="contentPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="838.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.monsterdev.automosreg.ui.TradeFilterController">
+   <children>
+      <VBox fx:id="wrapPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="5.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Поиск закупок" VBox.vgrow="NEVER">
+               <font>
+                  <Font name="Tahoma" size="24.0" />
+               </font>
+            </Text>
+            <HBox spacing="5.0" VBox.vgrow="NEVER">
+               <children>
+                  <Label text="Найдено закупок" HBox.hgrow="NEVER">
+                     <font>
+                        <Font name="Tahoma" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblTradesCount" text="Label">
+                     <font>
+                        <Font name="Tahoma Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <GridPane hgap="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #e8e8e8;" vgap="10.0" VBox.vgrow="NEVER">
+               <children>
+                  <TextField fx:id="edtTradeNum" promptText="Номер закупки" GridPane.rowIndex="1" />
+                  <TextField fx:id="edtCustomerName" promptText="Наименование или ИНН заказчика" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="edtEASUZNum" promptText="Р/н лота ПГ из ЕАСУЗ" GridPane.rowIndex="2" />
+                  <TextField fx:id="edtCustomerLoc" promptText="Местонахождения заказчика" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="edtTradeName" promptText="Наименование закупки" GridPane.rowIndex="3" />
+                  <HBox alignment="CENTER_LEFT" spacing="5.0" GridPane.columnSpan="2" GridPane.rowIndex="4" GridPane.vgrow="NEVER">
+                     <children>
+                        <Label text="КОЗ" />
+                        <TextField fx:id="edtKOZ" />
+                        <Button fx:id="btnKOZSelect" mnemonicParsing="false" onAction="#onKOZSelect" text="Выбрать..." />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" spacing="5.0" GridPane.rowIndex="5">
+                     <children>
+                        <Label text="Статус" />
+                        <ComboBox fx:id="cmbStatus" prefWidth="150.0" />
+                     </children>
+                  </HBox>
+                  <ComboBox fx:id="cmbFilters" minHeight="-Infinity" prefHeight="25.0" prefWidth="176.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <Label text="Сохраненные фильтры" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
+                  <HBox alignment="CENTER_RIGHT" spacing="5.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="5">
+                     <children>
+                        <Button fx:id="btnFilterSaveAs" mnemonicParsing="false" onAction="#onFilterSaveAs" text="Сохранить фильтр как..." />
+                        <Button fx:id="btnFilterApply" defaultButton="true" mnemonicParsing="false" onAction="#onFilterApply" text="Применить" />
+                        <Button fx:id="btnFilterClear" mnemonicParsing="false" onAction="#onFilterClear" text="Отчистить" />
+                     </children>
+                  </HBox>
+                  <VBox prefHeight="17.0" prefWidth="360.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                     <children>
+                        <Label text="Начальная максимальная цена" />
+                        <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                           <children>
+                              <TextField fx:id="edtSummMin" promptText="от" />
+                              <TextField fx:id="edtSummMax" promptText="до" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="24.0" prefWidth="360.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                     <children>
+                        <Label text="Дата начала подачи предложений" />
+                        <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                           <children>
+                              <DatePicker fx:id="dateStartFrom" promptText="с" />
+                              <DatePicker fx:id="dateStartTo" promptText="по" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="30.0" prefWidth="360.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3">
+                     <children>
+                        <Label text="Дата окончания подачи предложений" />
+                        <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                           <children>
+                              <DatePicker fx:id="dateEndFrom" promptText="с" />
+                              <DatePicker fx:id="dateEndTo" promptText="по" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" />
+               </columnConstraints>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <rowConstraints>
+                  <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="-Infinity" minHeight="10.0" valignment="BOTTOM" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="-Infinity" minHeight="10.0" valignment="BOTTOM" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="-Infinity" minHeight="10.0" valignment="BOTTOM" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="-Infinity" minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="-Infinity" minHeight="10.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+            <TableView fx:id="tblTrades" editable="true" VBox.vgrow="ALWAYS">
+               <columns>
+               </columns>
+            </TableView>
+            <HBox alignment="TOP_RIGHT" spacing="5.0" VBox.vgrow="NEVER">
+               <children>
+                  <Pagination fx:id="pagination" maxHeight="-Infinity" />
+                  <HBox spacing="5.0">
+                     <children>
+                        <Label text="Позиций:" />
+                        <ComboBox fx:id="cmbItemsPerPage" prefHeight="25.0" prefWidth="73.0" />
+                     </children>
+                     <padding>
+                        <Insets top="5.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" spacing="5.0" VBox.vgrow="NEVER">
+               <children>
+                  <Button fx:id="btnOk" mnemonicParsing="false" onAction="#onOk" text="Выбрать" />
+                  <Button fx:id="btnCancel" cancelButton="true" mnemonicParsing="false" onAction="#onCancel" text="Отмена" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </VBox>
+   </children>
+</StackPane>

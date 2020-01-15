@@ -1,0 +1,45 @@
+repositories {
+    mavenCentral()
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'application'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+group = 'net.mosterdev'
+mainClassName = 'net.monsterdev.automosreg.AutoMosreg'
+version = '1.0'
+
+dependencies {
+    compile 'org.projectlombok:lombok:1.18.2'
+    compile group: 'org.springframework', name: 'spring-core', version: '5.1.2.RELEASE'
+    compile group: 'org.springframework', name: 'spring-context', version: '5.1.2.RELEASE'
+    compile group: 'org.springframework', name: 'spring-beans', version: '5.1.2.RELEASE'
+    compile group: 'org.springframework', name: 'spring-orm', version: '5.1.2.RELEASE'
+    compile group: 'org.springframework', name: 'spring-tx', version: '5.1.2.RELEASE'
+    compile group: 'org.hibernate', name: 'hibernate-core', version: '5.3.7.Final'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.8.1'
+    compile group: 'com.google.guava', name: 'guava', version: '19.0'
+    compile group: 'com.h2database', name: 'h2', version: '1.4.197'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.1'
+    compile group: 'com.googlecode.log4jdbc', name: 'log4jdbc', version: '1.2'
+    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.6'
+    compile group: 'org.json', name: 'json', version: '20180813'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.8'
+    compile files('c:/JCP/JCP.jar')
+    compile files('c:/JCP/CAdES.jar')
+    compile files('c:/JCP/AdES-core.jar')
+    compile group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.50'
+    compile group: 'org.bouncycastle', name: 'bcpkix-jdk15on', version: '1.50'
+    compile group: 'net.sf.dozer', name: 'dozer', version: '5.5.1'
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.3.2'
+    testCompile group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
+    testCompile group: 'commons-io', name: 'commons-io', version: '2.6'
+}

@@ -1,0 +1,22 @@
+<persistence xmlns:http="http://xmlns.jcp.org/xml/ns/persistence" version="1.0"
+             xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence">
+    <persistence-unit name="net.monsterdev.automosreg.hibernate">
+        <class>net.monsterdev.automosreg.domain.User</class>
+        <class>net.monsterdev.automosreg.model.CertificateInfo</class>
+        <class>net.monsterdev.automosreg.domain.Document</class>
+        <class>net.monsterdev.automosreg.domain.Trade</class>
+        <class>net.monsterdev.automosreg.domain.Proposal</class>
+        <class>net.monsterdev.automosreg.domain.TradeProduct</class>
+        <class>net.monsterdev.automosreg.domain.ProposalProduct</class>
+        <class>net.monsterdev.automosreg.domain.FilterOption</class>
+        <properties>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.show_sql" value="true" />
+            <property name="use_sql_comments" value="true" />
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+            <property name="current_session_context_class" value = "thread"/>
+        </properties>
+    </persistence-unit>
+</persistence>

@@ -1,0 +1,1214 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Создать - Закупки малого объёма</title>
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function (d, w, c) {
+            (w[c] = w[c] || []).push(function() {
+                try {
+                    w.yaCounter49875445 = new Ya.Metrika2({
+                        id:49875445,
+                        clickmap:true,
+                        trackLinks:true,
+                        accurateTrackBounce:true
+                    });
+                } catch(e) { }
+            });
+
+            var n = d.getElementsByTagName("script")[0],
+                s = d.createElement("script"),
+                f = function () { n.parentNode.insertBefore(s, n); };
+            s.type = "text/javascript";
+            s.async = true;
+            s.src = "https://mc.yandex.ru/metrika/tag.js";
+
+            if (w.opera == "[object Opera]") {
+                d.addEventListener("DOMContentLoaded", f, false);
+            } else { f(); }
+        })(document, window, "yandex_metrika_callbacks2");
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/49875445" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    <link href="/Content/css?v=pbj1mxSA2zTjWT_43Grwr1c1iuCIzGuVa_fxNLqecpc1" rel="stylesheet"/>
+
+    <script type="text/template" id="wgtMessageBox">
+    <div class="wgtMessageBox__wrapper">
+        <div class="wgtMessageBox__title"></div>
+        <div class="wgtMessageBox__close" onclick="messageBox().hideMessage()"></div>
+        <div class="wgtMessageBox__content">
+            <ul></ul>
+        </div>
+    </div>
+</script>
+<script type="text/template" id="loadingPanel">
+    <div class="widgetLoadingPanel">
+        <div class="widgetLoadingPanel__overlay"></div>
+        <div class="widgetLoadingPanel__spinner"></div>
+    </div>
+</script>
+
+<script type="text/template" id="wgtMessageBoxChoice">
+    <div class="wgtMessageBoxChoice__wrapper">
+        <div class="wgtMessageBoxChoice__content"></div>
+        <span class="btn-ok">Ок</span><span class="" onclick="messageChoice().hideMessageChoice()">Отмена</span>
+    </div>
+</script>
+
+<script type="text/template" id="confirmModal">
+    <div class="box-modal text-center" id="confirmModal">
+        <div class="box-modal_close decline"><span class="icon-cancel"></span></div>
+        <div class="titleConfirm"><%= title %></div>
+        <div class="btn-group">
+            <a href=""class ="approve btn btn-grey inline">Да</a><a class="decline btn btn-grey inline">Нет</a>
+        </div>       
+    </div>
+</script>
+
+<script type="text/template" id="confirmModalWithComment">
+    <div class="box-modal text-center" id="confirmModal">
+        <div class="box-modal_close arcticmodal-close"><span class="icon-cancel"></span></div>
+        <div class="titleConfirm"><%= title %></div>
+        <div class="auxTitleConfirm"><%= auxtitle %></div>
+        <div class="btn-group">
+            <a href="" class="approve btn btn-grey inline">Да</a><div class="arcticmodal-close btn btn-grey inline">Нет</div>
+        </div>
+    </div>
+</script>
+
+
+<script type="text/template" id="confirmWithReasonModal">
+    <div class="box-modal text-center" id="confirmWithReasonModal">
+        <div class="box-modal_close arcticmodal-close"><span class="icon-cancel"></span></div>
+        <div class="modalWithReasonTitle mainTitleConfirm"><%= title %></div>
+        <div class="modalWithReasonTitle"><span class="required auxiliaryTitleConfirm"><%= auxiliaryTitle %></span></div>
+        <textarea class="confirmationReason"></textarea>
+        <div class="btn-group">
+            <button class="savebtn btn btn-block">Сохранить</button>
+            <div class="arcticmodal-close btn btn-grey inline">Отменить</div>
+        </div>
+    </div>
+</script>
+
+<script type="text/template" id="showBoxForMessageModal">
+    <div class="box-modal text-center" id="confirmWithReasonModal">
+        <div class="box-modal_close arcticmodal-close"><span class="icon-cancel"></span></div>
+        <div class="modalWithReasonTitle mainTitleConfirm"><%= title %></div>        
+        <textarea class="confirmationReason" id="boxMessage"></textarea>
+        <div class="btn-group">
+            <button class="savebtn btn btn-block">Отправить</button>
+            <div class="arcticmodal-close btn btn-grey inline">Отменить</div>
+        </div>
+    </div>
+</script>
+
+<script type="text/template" id="confirmDealCancelModal">
+    <div class="box-modal text-center" id="confirmCancelModal">
+        <div class="box-modal_close arcticmodal-close"><span class="icon-cancel"></span></div>
+        <h1 class="titleConfirm">Вы действительно хотите «Отказаться от заключения договора»?</h1>
+        <div class="text-left">
+            <h2>При отказе от заключения договора:</h2>
+            <ul>
+                <li>1) закупка перейдёт в состояние "Согласование" </li>
+                <li>2) текущий договор перейдёт в состояние "Заказчик отказался от подписания"</li>
+                <li>3) предложение перейдёт в статус "Предложение отклонено заказчиком во время заключения договора"</li>
+            </ul>
+        </div>
+        <div class="btn-group">
+            <button class="btn btn-grey yesBtn">Да</button>
+            <div class="arcticmodal-close btn btn-grey">Нет</div>
+        </div>
+    </div>
+</script>
+
+<script type="text/template" id="certificateWindowModal">
+    <div class="box-modal text-center">
+        <div class="modalwindow">
+            <div class="box-modal_close arcticmodal-close"><span class="icon-cancel"></span></div>
+            <h1 class="titleConfirm">Информация о сертификате</h1>
+            <div class="text-left">
+                <h2>Сертификат</h2>
+                <table class="info-table-modal">
+                    <tr class="odd-row">
+                        <td>Дата выдачи сертификата</td>
+                        <td class="localize_datetime"><%= NotBefore %></td>
+                    <tr>
+                    <tr class="even-row">
+                        <td>Срок действия сертификата</td>
+                        <td class="localize_datetime"><%= NotAfter %></td>
+                    <tr>
+                    <tr class="odd-row">
+                        <td>Номер сертификата</td>
+                        <td><a class="link-red" href="<%= DownloadCertUrl %>"><%= CertNumber %></a></td>
+                    <tr>
+                </table>
+                <h2>Подписавший</h2>
+                <table class="info-table-modal">
+                    <tr class="odd-row">
+                        <td>Имя</td>
+                        <td><%= Name %></td>
+                    <tr>
+                    <tr class="even-row">
+                        <td>Фамилия</td>
+                        <td><%= Surname %></td>
+                    <tr>
+                    <tr class="odd-row">
+                        <td>Организация</td>
+                        <td><%= Organization %></td>
+                    <tr>
+                    <tr class="even-row">
+                        <td>Роль</td>
+                        <td><%= Role %></td>
+                    <tr>
+                    <tr class="odd-row">
+                        <td>Email</td>
+                        <td><%= Email %></td>
+                    <tr>
+                    <tr class="even-row">
+                        <td>Департамент</td>
+                        <td><%= Departament %></td>
+                    <tr>
+                    <tr class="odd-row">
+                        <td>Местоположение</td>
+                        <td><%= Location %></td>
+                    <tr>
+                    <tr class="even-row" >
+                        <td>ИНН</td>
+                        <td><%= Inn %></td>
+                    <tr>
+                    <tr class="odd-row">
+                        <td>КПП</td>
+                        <td><%= Kpp %></td>
+                    <tr>
+                    <tr class="even-row">
+                        <td>ОГРН</td>
+                        <td><%= Ogrn %></td>
+                    <tr>
+                </table>
+            </div>
+        </div>
+        <div class="btn-group">
+            <button class="btn btn-grey arcticmodal-close">Закрыть</button>
+        </div>
+    </div>
+</script>
+
+<script type="text/template" id="confirmLegalPersonPrefillingInfo">
+    <div class="box-modal text-center">
+        <div class="modalwindow">
+            <div class="box-modal_close arcticmodal-close"><span class="icon-cancel"></span></div>
+            <h1 class="titleConfirm">Вы хотите предзаполнить информацию об организации?</h1>
+            <table class="info-table-modal" style="text-align: left;">
+                <tr class="odd-row">
+                    <td>Полное наименование</td>
+                    <td><%= FullName %></td>
+                <tr>
+                <tr class="even-row">
+                    <td>Краткое наименование</td>
+                    <td><%= ShortName %></td>
+                <tr>
+                <tr class="odd-row">
+                    <td>ИНН</td>
+                    <td><%= Inn %></td>
+                <tr>
+                <tr class="even-row">
+                    <td>КПП</td>
+                    <td><%= Kpp %></td>
+                <tr>
+                <tr class="odd-row">
+                    <td>ОГРН</td>
+                    <td><%= Ogrn %></td>
+                <tr>
+                <tr class="even-row">
+                    <td>Адрес места нахождения</td>
+                    <td><%= Address %></td>
+                <tr>
+            </table>
+        </div>
+        <div class="btn-group">
+            <div class="approve btn btn-grey inline">Да</div>
+            <div class="arcticmodal-close btn btn-grey inline">Нет</div>
+        </div>
+    </div>
+</script>
+
+<script type="text/template" id="individualEntrepreneurPrefillingInfo">
+    <div class="box-modal text-center">
+        <div class="modalwindow">
+            <div class="box-modal_close arcticmodal-close"><span class="icon-cancel"></span></div>
+            <h1 class="titleConfirm">Вы хотите предзаполнить информацию об организации?</h1>
+            <table class="info-table-modal" style="text-align: left;">
+                <tr class="odd-row">
+                    <td>ИНН</td>
+                    <td><%= Inn %></td>
+                <tr>
+                <tr class="even-row">
+                    <td>ОГРНИП</td>
+                    <td><%= Ogrn %></td>
+                <tr>
+                <tr class="odd-row">
+                    <td>Адрес места нахождения</td>
+                    <td><%= Address %></td>
+                <tr>
+            </table>
+        </div>
+        <div class="btn-group">
+            <div class="approve btn btn-grey inline">Да</div>
+            <div class="arcticmodal-close btn btn-grey inline">Нет</div>
+        </div>
+    </div>
+</script>
+
+<script type="text/template" id="userAddToOrgMessageBox">
+    <div class="box-modal text-center" id="confirmModal">
+        <div class="box-modal_close decline"><span class="icon-cancel"></span></div>
+        <div class="titleConfirm">
+            Организация «<%= OrgName %>» ИНН <%= Inn %> КПП <%= Kpp %>, уже зарегестрирована в системе.
+            ваша заявка на добавление пользователя будет направлена администратору организации
+            «<%= AdminFulName %>». Если вы впервые регистрируете организацию в системе,
+            то просим вас обратится в службу технической поддержки для выяснения обстоятельств <%= techTupport %>
+        </div>
+        <div class="btn-group">
+            <a href="" class="approve btn btn-grey inline">Направить заявку администрации</a>
+            <a class="decline btn btn-grey inline">Отмена</a>
+        </div>
+    </div>
+</script>
+
+<script type="text/template" id="infoWindowTmplt">
+    <div class="box-modal text-center" id="infoWindowTmplt">
+        <div class="titleConfirm justifyTextAlign"><%= info %></div>
+        <div class="btn-group">
+            <a href="" class="approve btn btn-grey inline">Да</a>
+        </div>
+    </div>
+</script>
+    <script src="/bundles/scripts?v=sR0EfmGjnUIudGQyunYGR8GeBSVsYzou8J-otzEWkM01"></script>
+
+    <script src="/bundles/scriptsformainlayout?v=PxF7NE66VS_pTUIpZm5saLZhQdVhRQgWLl1ZqTJ4YXc1"></script>
+
+    
+        <link rel="SHORTCUT ICON" href="/Layout/GetFavicon?guid=15a537be-63c7-4beb-843a-94967e7ec868">
+    
+
+<script type="text/javascript">
+    var signalREnable = false;
+    $.ajaxPrefilter(function (options) {
+        if (options.url.indexOf('https://suggestions.dadata.ru/') === 0) {
+            return;
+        }
+
+        if (!options.beforeSend) {
+            options.beforeSend = function (xhr) {
+                xhr.setRequestHeader('XXX-TenantId-Header',
+                    '2');
+                    xhr.setRequestHeader('Authorization', 'Bearer KUnKQFGWdipHWdwTKs8YEbZH-rkQy7DyFws7Nq82UbE202w1KlVEfI-h8WD0Aq8e_WBfAEj9ULhdML3qNLQlM3tQaZwiXppPEVkP9pdqhrkHbRmH4QsMT2SVNEWg7mzACfWbiSoVTvvL6L_QmxlO6DyOSvCAtwKI8qvImQWTbbmVHZZZmA49BBT4CNsYOfeS9R16po4FZbB-v5g1D8GFJxjsGC6o63Z6FQ-s3Ly0mmT9uInDVboD1wr9eZ8E_8eAwu_rFL4pIwIiSAQGDfFM3FTUiJfi4QMOrj7oLx_lZpmLon4Cw9LRZ_1EAQFsDIjMD8Bq2WG3wrjvMot32exv4ivYkudHFuUNEVqt-ZW_OBohHthMTC6OwSuGtvDYBfew5SAoo0QilJfNlpGiqxEXD45P-rNX6e8MfZbdodl3w2sD8pClfAOeN32uEYTdiKtHeS4G3kzFSIik_RT50MzT3aYxX5sE4bxqqosuVoWPwYnH1xCUBpqj_Iu1ImU9YfKwfHRGFcVvGetR4CK3T89pdJgKBCE');
+            }
+        }
+    });
+
+        
+    $(function () {
+        window.notReadedNotificationsCount = 0;
+        window.waitingForApproveOrderCount = 0;
+
+        window.bubbleRender = function (bubble) {
+            if (bubble.text() === '0' || bubble.text().length === 0) {
+                bubble.hide();
+            }
+            else {
+                bubble.css('display', 'inline-block');
+            }
+        }
+
+        if(signalREnable)
+        {
+            var notificationHubProxy = $.connection.notificationHub;
+
+            notificationHubProxy.client.newNotifications = function (newIncNotificationsCount) {
+                if (!_.isUndefined(window.notReadedNotificationsCount) && window.notReadedNotificationsCount >= 0) {
+                    $(".notification_bubble").text(window.notReadedNotificationsCount + newIncNotificationsCount);
+                    window.notReadedNotificationsCount += newIncNotificationsCount;
+                    window.bubbleRender($(".notification_bubble"));
+                }
+            };
+
+            notificationHubProxy.client.notificationsReaded = function (readedNotificationCount) {
+                if (!_.isUndefined(window.notReadedNotificationsCount) && window.notReadedNotificationsCount > 0) {
+                    $(".notification_bubble").text(window.notReadedNotificationsCount - readedNotificationCount);
+                    window.notReadedNotificationsCount -= readedNotificationCount;
+                    window.bubbleRender($(".notification_bubble"));
+                }
+            };
+        }
+
+        //notificationHubProxy.client.waitingForApproveOrders = function () {
+        //    if (!_.isUndefined(window.waitingForApproveOrderCount) && window.waitingForApproveOrderCount >= 0) {
+        //        $(".order_bubble").text(window.waitingForApproveOrderCount + 1);
+        //        window.waitingForApproveOrderCount += 1;
+        //        window.bubbleRender($(".order_bubble"));
+        //    }
+        //};
+
+        //notificationHubProxy.client.approveRejectOrders = function () {
+        //    if (!_.isUndefined(window.waitingForApproveOrderCount) && window.waitingForApproveOrderCount > 0) {
+        //        $(".order_bubble").text(window.waitingForApproveOrderCount - 1);
+        //        window.waitingForApproveOrderCount -= 1;
+        //        window.bubbleRender($(".order_bubble"));
+        //    }
+        //};
+
+        //notificationHubProxy.client.canceledOrdersByCustomer = function () {
+        //    if (!_.isUndefined(window.waitingForApproveOrderCount) && window.waitingForApproveOrderCount > 0) {
+        //        $(".order_bubble").text(window.waitingForApproveOrderCount - 1);
+        //        window.waitingForApproveOrderCount -= 1;
+        //        window.bubbleRender($(".order_bubble"));
+        //    }
+        //};
+
+        ajaxHelpers.sendRequest('https://api.market.mosreg.ru/api/Notification/GetNewNotificationsCount', 'GET', {})
+            .done(function (data) {
+                window.notReadedNotificationsCount = data;
+                $(".notification_bubble").text(window.notReadedNotificationsCount);
+                window.bubbleRender($(".notification_bubble"));
+                if(signalREnable)
+                {
+                    $.connection.hub.start()
+                        .done(function () {
+                            console.log("connected to signalr hub");
+                        })
+                        .fail(function () {
+                            console.log("cannot connect to signalr hub");
+                        });
+                }
+            })
+            .fail(function ($xhr) {
+                var err = processRequestHelper.extractErrors($xhr.responseJSON);
+                messageBox()
+                    .showMessage({
+                        messages: ["Не удалось получить количество новых уведомлений: <br>" + err],
+                        autoclose: false,
+                        type: "error"
+                    });
+            });
+
+        
+    });
+
+    
+
+    ajaxHelpers.init('/Account/SignOut');
+    koVMs = {};
+    datepickerOptions = {};
+
+    //глобальный объект, хранящий ресурсы
+    window.resourceObject = {
+        // роли
+        roles: {
+            administrator: 'Administrator',
+            participant: 'Participant',
+            customer: 'Customer'
+        },
+        appStates: {
+            actual: 'Действительно'
+        },
+        appMeetsStates: {
+            notDefined: 'Неопределено',
+            meet: 'Соответствует',
+            doesNotMeet: 'Не соответствует'
+        },
+        //значения перечислений
+        enumValues:
+        {
+            draftTradeStateName: 'Черновик',
+            publishingStateName: 'Публикуется',
+            fillingApplicationsStateName: 'Прием предложений',
+            IdVatRateNotDefined: '0',
+            IdVatRateSubject: '5',
+            IdVatRateNotSubject: '10',
+            IdExcludingVatRate: '15',
+            IdTrdateStateFillingApplication: '15',
+            IdTrdateStateAgreementConditions: '20',
+            IdTrdateStateNotTookPlace: '25',
+            createdByCustomerStateName: 'Сформировано заказчиком',
+            applicationActualStateName: 'Действительно',
+            orderDraftState: 'Черновик',
+            applicationRefusedConclusionBecauseOfTheRegisterOfUnscrupulousSuppliersStateName: 'Оттказался от заключения, поставщик в РНП'
+        },
+
+        dealForm: {
+            paper: 2
+            },
+
+        localization: {
+            dealSignedOutsideEShop: 'Договор заключён вне электронного магазина',
+            yesBoolProperty: 'Да',
+            noBoolProperty: 'Нет'
+        },
+
+        //адреса
+        urls: {
+            urlGetTradeForAdministrator: 'https://api.market.mosreg.ru/api/Administrator/GetTrade',
+            urlUpdateTradeForAdministrator: 'https://api.market.mosreg.ru/api/Administrator/UpdateTradeFillingApplicationEndDate',
+            editPublishedTradeActionUrl: 'https://api.market.mosreg.ru/api/Trade/EditPublishedTrade',
+            editPublishedTradeDateActionUrl: 'https://api.market.mosreg.ru/api/Trade/EditPublishedTradeDates',
+            exportToExcelTest: 'https://api.market.mosreg.ru/api/Trade/ExportToExcelTest',
+            saveAsDraftTradeUrl: 'https://api.market.mosreg.ru/api/Trade/SaveAsDraft',
+            publishTradeUrl: 'https://api.market.mosreg.ru/api/Trade/Publish',
+            tradeIndexRedirectUrl: '/',
+            changePasswordUrl: 'https://api.market.mosreg.ru/api/account/changepassword',
+            currentUserInfoUrl: 'https://api.market.mosreg.ru/api/account/manageinfo',
+            saveUserInfoUrl: 'https://api.market.mosreg.ru/api/account/saveuserinfo',
+            saveOrganizationDocumentsUrl: 'https://api.market.mosreg.ru/api/account/SaveOrganizationDocuments',
+            webApiCheckOrganizationExists: 'https://api.market.mosreg.ru/api/Account/CheckOrganizationExists',
+            signDealOutsideUrl: 'https://api.market.mosreg.ru/api/Deal/SignDealOutsideEShop',
+            sendForApproveUrl: 'https://api.market.mosreg.ru/api/Deal/SentForParticipantApprove',
+            repeatedlySendForApproveUrl: 'https://api.market.mosreg.ru/api/Deal/RepeatedlySentForParticipantApprove',
+            changeFormToPaperUrl: 'https://api.market.mosreg.ru/api/Deal/ChangeFormToPaper',
+            getAllParticipantsUrl: 'https://api.market.mosreg.ru/api/participants',
+            cancelDealUrl: 'https://api.market.mosreg.ru/api/Deal/CancelDeal',
+            uiViewUserInfoUrl: '/Account/GetManageUserInfo',
+            uiViewDocsUrl: '/Account/ManageOrganizationDocuments',
+            uiRenewUserClaims: '/Account/RefreshCookies',
+            sendConfirmationEmailUrl: 'https://api.market.mosreg.ru/api/account/SendConfirmationEmail',
+            uiConfirmationEmailSent: '/Account/ConfirmationEmailSent',
+            checkIsCodeExists: 'https://api.market.mosreg.ru/api/Dictionary/IsCodeExists',
+            getClassificatorElementWithoutChildsByCode: 'https://api.market.mosreg.ru/api/Dictionary/GetElementWithoutChildsByCode',
+            getTreeElements: 'https://api.market.mosreg.ru/api/Dictionary',
+            searchByName: 'https://api.market.mosreg.ru/api/Dictionary/GetAllByName',
+            searchByCode: 'https://api.market.mosreg.ru/api/Dictionary/GetAllByCode',
+            getAllChildren: 'https://api.market.mosreg.ru/api/Dictionary/GetAllByParentCodeRecursive',
+            getAllByListOfParentCodes: 'https://api.market.mosreg.ru/api/Dictionary/GetAllByListOfParentCodes',
+            getAllNotificationsUrl: 'https://api.market.mosreg.ru/api/Notification/GetNotifications',
+            removeNotificationsUrl: 'https://api.market.mosreg.ru/api/Notification/RemoveNotifications',
+            removeNotificationUrl: 'https://api.market.mosreg.ru/api/Notification/RemoveNotification',
+            webApiSendNotificationForAddingUserUrl: 'https://api.market.mosreg.ru/api/Notification/SendNotificationForAddingUser',
+            applicationGridUrl: '/Application',
+            applicationDoesntMeetRequirementsUrl: 'https://api.market.mosreg.ru/api/Applications/applicationId/ApplicationRefuseToConclude',
+            markAsReadUrl: 'https://api.market.mosreg.ru/api/Notification/MarkNotificationsAsRead',
+            markAsUnReadUrl: 'https://api.market.mosreg.ru/api/Notification/MarkNotificationsAsUnread',
+            webApiUrlUserHasPassword: 'https://api.market.mosreg.ru/api/account/haspassword',
+            webApiUrlUpdateInterests: 'https://api.market.mosreg.ru/api/organization/updateinterests',
+            dealGridUrl: '/Deal',
+            approveCustomerDealUrl: 'https://api.market.mosreg.ru/api/Deal/ApproveCustomerDeal',
+            rejectCustomerDealUrl: 'https://api.market.mosreg.ru/api/Deal/RejectCustomerDeal',
+            concludeApprovedDealUrl: 'https://api.market.mosreg.ru/api/Deal/ConcludeApprovedDeal',
+            webUIViewParticipantInfoUrl:
+            '/Participant/ViewParticipantInfo?participantId=identifier',
+            webUIViewParticipantInfoUrl2:
+                '/Participant/ViewParticipantInfo2?participantId=identifier',
+            webUIViewCustomerInfoUrl: '/Customer/ViewCustomerInfo?customerId=identifier',
+            webApiGetCustomerByIdUrl: '/Customer/ViewCustomerInfoById?customerId=identifier',
+            webApiGetCustomerByInnUrl: '/Customer/ViewCustomerInfoInn?customerId=identifier',
+            webUIParticipantInterestsUrl: '/Account/GetParticipantOrganizationInterests',
+            webUIEditParticipantInterestsUrl: '/Account/EditParticipantOrganizationInterests',
+            urlCheckOrganizationInteresClassifcators: 'https://api.market.mosreg.ru/api/organization/CheckOrganizationInteresClassifcators',
+            urlClearOrganizationInteres: 'https://api.market.mosreg.ru/api/organization/ClearInterests',
+            removeTradeDraft: 'https://api.market.mosreg.ru/api/Trade',
+            closeWithoutDealsUrl: 'https://api.market.mosreg.ru/api/Trade/tradeId/CloseWithoutDeals',
+            suggestPaperFormSigningUrl: 'https://api.market.mosreg.ru/api/Deal/SuggestPaperFormSigning',
+            activateOfferUrlWebApi: 'https://api.market.mosreg.ru/api/participantoffer/ActivateOffers',
+            participantOfferGridUrl: '/ParticipantOffer',
+            getAllParticipantOrrefUrl: 'https://api.market.mosreg.ru/api/participantoffer/getoffers',
+            participantOfferPublishUrl: 'https://api.market.mosreg.ru/api/participantoffer/Publish',
+            participantOfferSaveAsDraftUrl: 'https://api.market.mosreg.ru/api/participantoffer/SaveAsDraft',
+            webApiRemoveParticipantOffersUrl: 'https://api.market.mosreg.ru/api/participantoffer/remove',
+            viewParticipantOfferInfoUrl: '/ParticipantOffer/ViewOffer?id=identifier',
+            webApiDeactivateParticipantOffersUrl: 'https://api.market.mosreg.ru/api/participantoffer/DeactivateOffers',
+            WebApiCheckOffersBelongsOneParticipantUrl: 'https://api.market.mosreg.ru/api/participantoffer/CheckOffersBelongsOneParticipant',
+            WebApiGetParticipantOffersInfoUrl: 'https://api.market.mosreg.ru/api/participantoffer/offerIds/GetOffersInfo',
+            revokeApplicationUrl: 'https://api.market.mosreg.ru/api/Applications/applicationId/Revoke',
+            removeApplicationDraft: 'https://api.market.mosreg.ru/api/Trade/tradeId/Application/applicationId',
+            editPublishedApplicationActionUrl: 'https://api.market.mosreg.ru/api/Application/EditPublished',
+            createApplicationsActionUrl: 'https://api.market.mosreg.ru/api/Trade/tradeId/CreateApplicationsByCustomer',
+            editApplicationUIrl: '/Application/Edit' +
+                "?tradeId=idOfTrade&applicationId=idOfApplication",
+
+            webApiMakeCustomerToCustomerAndParticipantUrl: 'https://api.market.mosreg.ru/api/account/MakeCustomerToCustomerAndParticipant',
+            webApiGetAllUsersForOrganizationUrl: 'https://api.market.mosreg.ru/api/account/GetAllUsersForOrganization',
+            webApiMakeUsersNotOrgAdminForOrganizationUrl: 'https://api.market.mosreg.ru/api/account/MakeUsersNotOrgAdminForOrganization',
+            webApiMakeUsersOrgAdminForOrganizationUrl: 'https://api.market.mosreg.ru/api/account/MakeUsersOrgAdminForOrganization',
+            webApiBlockUsersForOrganizationUrl: 'https://api.market.mosreg.ru/api/account/BlockUsersForOrganization',
+            webApiUnBlockUsersForOrganizationUrl: 'https://api.market.mosreg.ru/api/account/UnBlockUsersForOrganization',
+            WebApiFinishReviewApplicationUrl: 'https://api.market.mosreg.ru/api/Trade/FinishReviewApplication',
+            editTradeUrl: '/Trade/Edit' + "?Id=idOfTrade",
+            editTradeDatesUrl: '/Trade/EditDates' + "?Id=idOfTrade",
+            revokeTradeUrl: 'https://api.market.mosreg.ru/api/Trade/tradeId/RevokeTrade',
+            webApiUpdateOrganizationSettings: 'https://api.market.mosreg.ru/api/organization/updateSettings',
+            webApiGetTimeZonesList: 'https://api.market.mosreg.ru/api/common/gettimezonelist',
+            webUIGetManageInfo: '/Account/GetManageUserInfo',
+            webUIViewOrganizationSettings: '/Account/ViewOrganizationSettings',
+            administratorGetWhiteEmails: 'https://api.market.mosreg.ru/api/Administrator/UpdateWhiteEmails',
+            webApiAddCodeToOrgInterestsUrl: 'https://api.market.mosreg.ru/api/organization/addcodetoorganizationinterests',
+            certificateListPage: '/Account/CertificateList',
+            getDataToSignByParticipantForDealUrl: 'https://api.market.mosreg.ru/api/Deal/GetDataToSignByParticipantForDeal',
+            getDataToSignByCustomerForDealUrl: 'https://api.market.mosreg.ru/api/Deal/GetDataToSignByCustomerForDeal',
+            getDataForDealDocumentSignedByCustomer: 'https://api.market.mosreg.ru/api/Deal/GetDataForDealDocumentSignedByCustomer',
+            getDataForDealDocumentSignedByParticipant: 'https://api.market.mosreg.ru/api/Deal/GetDataForDealDocumentSignedByParticipant',
+            getCertificateInfo: 'https://api.market.mosreg.ru/api/account/GetCertificateInfo',
+            tradesToExcelUrl: 'https://api.market.mosreg.ru/api/Trade/ExportToExcel',
+            dealsToExcelUrl: 'https://api.market.mosreg.ru/api/Deal/ExportToExcel',
+            customersToExcelUrl: 'https://api.market.mosreg.ru/api/Customers/ExportToExcel',
+            orderIndexRedirectUrl: '/Order',
+            webApiSaveAsDraftOrderUrl: 'https://api.market.mosreg.ru/api/Order/SaveAsDraft',
+            webApiSendOrderToParticipantUrl: 'https://api.market.mosreg.ru/api/Order/SendToParticipant',
+            editOrderurl: '/Order/Edit' + '?id=idOfOrder',
+            webApiCancelOrderUrl: 'https://api.market.mosreg.ru/api/Order/idOfOrder/CancelOrder',
+            WebApiApproveOrderByParticipantUrl: 'https://api.market.mosreg.ru/api/Order/ApproveByParticipant',
+            WebApiRejectOrderByParticipantUrl: 'https://api.market.mosreg.ru/api/Order/RejectByParticipant',
+            WebApiSignPaperDealUrl: 'https://api.market.mosreg.ru/api/Deal/SignPaperDeal',
+            WebApiProcessNotSignedDealAfterSevenDaysUrl: 'https://api.market.mosreg.ru/api/Deal/ProcessNotSignedDealAfterSevenDays',
+            WebApiWebApiCommentToTheCustomerUrlUrl: 'https://api.market.mosreg.ru/api/Deal/CommentToTheCustomer',
+            webUiViewDealByTrade: '/Deal/ViewDealByTrade',
+            webUiViewDeal: '/Deal/ViewDeal',
+            webUiViewTrade: '/Trade/ViewTrade',
+            //createDealOutEShop: '/Deal/CreateDealOutside',
+
+            suggestionsServiceUrl: 'https://suggestions.dadata.ru/suggestions/api/4_1/rs',
+            suggestionsToken: '9b670c4aba429375079bcc7b0c43cf92b5f7219a',
+            editDealChangingFormToPaperUrl: '/Deal/ChangeDealForm' + "?dealId=idOfDeal",
+            getAllOrganizationsUrl: 'https://api.market.mosreg.ru/api/Organizations',
+            webUIDownloadFileUrl: '/File/DownloadCertificate' + '?url=urlparam',
+            webApiGetShortParticipantInfo: 'https://api.market.mosreg.ru/api/participants/participantshortinfo',
+            webApiValidatePhysicalPersonAgreementUrl: 'https://api.market.mosreg.ru/api/account/CreatePhysicalPersonAgreement',
+            webApiProlongateTradeUrl: 'https://api.market.mosreg.ru/api/trade/prolongatenottookedplacetrade'
+        },
+
+        consts:
+        {
+            maxDisplayedCellContentLength: 60,
+            threeDots: " ...",
+            decimalRegExp: /^(\d+((\.|\,)?\d{0,2}|(\.|\,)\d{0,2}))$/g,
+            intRegExp: /^\d+$/g,
+            emailRegExp: /^([a-zA-Z0-9\-\._]*\@?[a-zA-Z0-9\-_]*\.?[a-zA-Z0-9\-_]*)$/g
+        }
+    };
+    var cryptoProBrowserPluginProviderAsyncUrl = '/Scripts/CryptoProBrowserPluginProviderAsync?v=_-7nI1vcSrASeTBOp7cxOZdclSym5RY4CAR_Zj6mjjQ1\
+';
+    var cryptoProBrowserPluginProviderSyncUrl = '/Scripts/CryptoProBrowserPluginProviderSync?v=JZUanaask544lK_74xi9DknTBBGnkO87Jj4bYjiKIpA1\
+';
+</script>
+
+
+    <!--[if lt IE 9]>
+        <script src="/Scripts/html5?v=1UyW6sMn8GKhfG42oTGCw84ivFNre0kDxPEdW2WOAik1"></script>
+
+    <![endif]-->
+</head>
+<body>
+    <div id="main-wrapper">
+        <!-- Header Block -->
+<div class="header">
+    <div class="header-items">
+        <div class="header-item__logo">
+            <a href="/">
+                <img src="data:image/png;base64, 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"/>
+            </a>
+        </div>
+        <div class="header-item__tagline">
+            ЭЛЕКТРОННЫЙ МАГАЗИН МОСКОВСКОЙ ОБЛАСТИ
+        </div>
+
+
+    <div class="header-item__account-info">
+
+        <div class="ellipsis">
+                    <span>ИНН: 742200086564</span>
+
+        </div>
+        <div class="ellipsis">
+<a class="link-red" href="/Account/GetManageUserInfo">Кощеев Максим Евгеньевич</a>
+        </div>
+        <div class="ellipsis">
+                    <span>Сертификат заполнен</span>
+
+        </div>
+        <div class="ellipsis">
+            <a class="btn btn-grey" href="http://easuz.mosreg.ru/Support">Обратная связь</a>
+        </div>
+    </div>
+
+
+        <div class="header-item__auth-block">
+            <div class="header-item__auth-block__date">
+                <span id="currentTime" class="text-red"></span>
+                <span id="currentDate"></span>
+            </div>
+            <div class="header-item__auth-block__logout">
+                <form action="/Account/SignOut" class="navbar-right" id="logoutForm" method="post"><input name="__RequestVerificationToken" type="hidden" value="4H1gHmd8OplIzOpnWqjbjJsrvwgeoevRVCqxwUF-d_pwvTpZc1EeKvD1sYFxKMQNoc88NhrWynlhmFnw9vNi6Rn5Bl9Acayp4A8EkZQNUwenfAWB-7x43BkwvA-zyQc4opPq5uH6s4JNccSTu5X-RA2" />        <a href="javascript:document.getElementById('logoutForm').submit()">Выход</a>
+</form>
+            </div>
+        </div>
+    </div>
+<div id="main-menu" class="header-nav">
+    <ul>
+        <li><a href="/">Закупки</a></li>
+        <li><a href="/Application">Предложения на закупки</a></li>
+        <li><a href="/ParticipantOffer">Предложения о продаже</a></li>
+        
+        <li><a href="/Deal">Договоры</a></li>
+        <li class="header-nav__Notification">
+            <a href="/Notification">Уведомления</a>
+            <span class="header-nav__item__bubble notification_bubble"></span>
+        </li>
+        <li><a href="/Participant">Реестр поставщиков</a></li>
+        <li><a href="/Customer">Реестр заказчиков</a></li>
+    </ul>
+</div>    <!-- End: Header Block -->
+
+    <div class="header-breadcrumbs">
+        
+        <a class="link-red" href="/" title="Главная">Главная</a>
+         &gt; 
+        <a class="link-red" href="/Application" title="Предложения на закупки">Предложения на закупки</a>
+         &gt; 
+    Создание предложения
+
+    </div>
+</div>
+
+        <div class="page">
+            <div class="page__content full-width">
+                
+
+
+<script src="/bundles/applicationviewmodels?v=RMpjRoEjhimmPugV_fPgXmn3IBIdVDkHe5NPkshCWDk1"></script>
+
+
+<h1>Предложение на закупку № 408828 Поставка продуктов питания прочих</h1>
+
+<div class="applicationform form-stripped">
+
+    <div>
+        <input type="hidden" value=0 data-bind="initializeValue: pageVM.Id, value: pageVM.Id" />
+    </div>
+
+    <h2>Информация о предмете закупки</h2>
+
+    <div contenteditable="false">
+        <table class="info-table width-100">
+            <tbody>
+                <tr>
+                    <td><label for="Trade_TradeName">Наименование</label></td>
+                    <td>Поставка продуктов питания прочих</td>
+                </tr>
+                <tr>
+                    <td><label for="Trade_InitialPrice">НМЦК, руб.</label></td>
+
+                    <td>34150,95</td>
+                </tr>
+                <tr>
+                    <td><label for="Trade_FillingApplicationEndDate">Дата окончания подачи предложений</label></td>
+                    <td class="localize_datetime">2019-01-14T00:00:00.000Z</td>
+                </tr>
+                <tr>
+                    <td><label for="Trade_PlanedDealSignDate">Плановая дата заключения договора</label></td>
+                    <td>16.01.2019</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="scroll-body">
+    <table class="stripped-table">
+        <thead class="scroll-head">
+            <tr>
+                <th>№</th>
+                <th>Наименование товара, работ, услуг</th>
+                <th>Код классификатора</th>
+                <th>Единицы измерения</th>
+                <th>Количество</th>
+                <th class="required">Стоимость единицы продукции</th>
+                <th>Стоимость поставляемого товара, выполняемых работ, оказываемых услуг</th>
+            </tr>
+        </thead>
+
+        <tbody data-bind="foreach: koVMs.pageVM.Products">
+        <tr>
+            <td data-bind="text: PositionNumber"></td>
+            <td data-bind="text: Name"></td>
+            <td data-bind="text: ClassificatorDescription"></td>
+            <td data-bind="text: OkeiDescription"></td>
+            <td data-bind="text: Quantity"></td>
+            <td>
+                <div>
+                    <input class="embedded-in-grid-cell" data-bind="value: Price" data-val="true" data-val-number="The field Цена must be a number." data-validation="decimal" id="Price" name="Price" type="text" value="" />
+                </div>
+            </td>
+            <td data-bind="text: DisplayedSumm"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+    <table class="info-table width-100">
+        <tbody>
+            <tr>
+                <td><label class="required" for="Price">Цена</label></td>
+                <td>
+                    <input data-bind="initializeValue: pageVM.Price, value: pageVM.Price" data-val="true" data-val-number="The field Цена must be a number." data-validation="decimal" disabled="True" id="Price" name="Price" type="text" value="" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="info-table width-100">
+        <tbody>
+            <tr>
+                <td><label for="Trade_DeliveryTerms">Сроки поставки</label></td>
+                <td>Планируемая дата исполнения договора:31.12.2019</td>
+            </tr>
+            <tr>
+                <td><label class="inline"><label for="Trade_DeliveryPlace">Место поставки</label></label></td>
+                <td>Московская область, г. Клин, ул. Мира, д. 3а.</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="collapsibleTab collapsed">
+    <h1>Документы закупки</h1>
+    <div style="display: none">
+        <table class="stripped-table">
+            <thead>
+                <tr>
+                    <th style="width: 373px;">Описание</th>
+                    <th style="width: 120px;">Ссылка на скачивание</th>
+                </tr>
+            </thead>
+            <tbody>
+                        <tr class="ui-widget-content jqgrow ui-row-ltr">
+                            <td>Бакалея договор</td>
+                            <td><a class="link-red" href="http://easuz.mosreg.ru/easuz2/api/Core/FileStorage/GetDownload?id=44651732">Скачать</a></td>
+                        </tr>
+                        <tr class="ui-widget-content jqgrow ui-row-ltr">
+                            <td>бакалея договор</td>
+                            <td><a class="link-red" href="http://easuz.mosreg.ru/easuz2/api/Core/FileStorage/GetDownload?id=44651688">Скачать</a></td>
+                        </tr>
+                        <tr class="ui-widget-content jqgrow ui-row-ltr">
+                            <td>Приложение к проекту государственного (муниципального) контракта 1413331 2018_11_21-10_13</td>
+                            <td><a class="link-red" href="http://easuz.mosreg.ru/easuz2/api/Core/FileStorage/GetDownload?id=44651645">Скачать</a></td>
+                        </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+    <h2>Предложение поставщика</h2>
+
+    <table class="info-table">
+        <tbody>
+            <tr>
+                <td><label for="AgreeWithCustomerConditions">Согласен с условиями заявки заказчика</label></td>
+                <td>
+                    <input checked="checked" data-bind="initializeValue: pageVM.AgreeWithCustomerConditions, value: pageVM.AgreeWithCustomerConditions" data-val="true" data-val-required="Требуется поле Согласен с условиями заявки заказчика." disabled="disabled" id="AgreeWithCustomerConditions" name="AgreeWithCustomerConditions" type="checkbox" value="true" /><input name="AgreeWithCustomerConditions" type="hidden" value="false" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="required">
+                        <label for="OfferExpiryDate">Срок действия предложения</label>
+                    </span>
+                    <br/>
+                    <span class="font-italic font-regular">(Срок действия предложения должен быть больше даты окончания подачи предложений) </span>
+                </td>
+                <td>
+                    <div class="relative inline">
+                        <input type="text"
+                               class="datepicker margin-clear"
+                               data-bind="value: pageVM.date, enable: !pageVM.NeverExpired()"/>
+                    </div>
+                    <span>
+                        <input type="checkbox" data-bind="checked: pageVM.NeverExpired" />
+                        <label for="NeverExpired">Срок действия неограничен</label>
+                    </span>
+
+                </td>
+            </tr>
+            <tr>
+                <td><label for="VatRateState">Облагается НДС</label></td>
+                <td><input type="checkbox" data-bind="checked: pageVM.IncludeVatRate" /></td>
+            </tr>
+            <tr>
+                <td>
+                    <div data-bind="css: { required: pageVM.IncludeVatRateChecked }">
+                        <label for="VatRate">Ставка НДС</label>&nbsp;%
+                    </div>
+                </td>
+                <td>
+                    <select id="VatRate" name="VatRate" data-bind="options: pageVM.AvailableVatRates,
+                                                               value: pageVM.VatRate,
+                                                               enable: pageVM.IncludeVatRateChecked"></select>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2 class="inline">Контактная информация</h2><button data-bind="click: pageVM.FillContactInformation" class="btn btn-grey">Заполнить из контактной информации участника</button>
+    <table class="info-table">
+    <tbody>
+        <tr>
+            <td>
+                <span class="required">
+                    <label for="ContactInfoEmail">Email контактного лица</label>
+                </span>
+            </td>
+            <td>
+                <input data-bind="initializeValue: pageVM.ContactInfo.ContactInfoEmail, value: pageVM.ContactInfo.ContactInfoEmail" data-validation="emailValidation" id="ContactInfoEmail" name="ContactInfoEmail" type="text" value="" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="ContactInfoFax">Факс контактного лица</label>
+            </td>
+            <td>
+                <input data-bind="initializeValue: pageVM.ContactInfo.ContactInfoFax, value: pageVM.ContactInfo.ContactInfoFax" data-validation="faxValidation" id="ContactInfoFax" name="ContactInfoFax" type="text" value="" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="required">
+                    <label for="ContactInfoPhone">Телефон контактного лица</label>
+                </span>
+            </td>
+            <td>
+                <input data-bind="initializeValue: pageVM.ContactInfo.ContactInfoPhone, value: pageVM.ContactInfo.ContactInfoPhone" data-validation="phoneValidation" id="ContactInfoPhone" name="ContactInfoPhone" type="text" value="" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="required">
+                    <label for="ContactInfoFirstName">Имя контактного лица</label>
+                </span>
+            </td>
+            <td>
+                <input data-bind="initializeValue: pageVM.ContactInfo.ContactInfoFirstName, value: pageVM.ContactInfo.ContactInfoFirstName" id="ContactInfoFirstName" name="ContactInfoFirstName" type="text" value="" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="required">
+                    <label for="ContactInfoMiddleName">Отчество контактного лица</label>
+                </span>
+            </td>
+            <td>
+                <input data-bind="initializeValue: pageVM.ContactInfo.ContactInfoMiddleName, value: pageVM.ContactInfo.ContactInfoMiddleName" id="ContactInfoMiddleName" name="ContactInfoMiddleName" type="text" value="" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="required">
+                    <label for="ContactInfoLastName">Фамилия контактного лица</label>
+                </span>
+            </td>
+            <td>
+                <input data-bind="initializeValue: pageVM.ContactInfo.ContactInfoLastName, value: pageVM.ContactInfo.ContactInfoLastName" id="ContactInfoLastName" name="ContactInfoLastName" type="text" value="" />
+            </td>
+        </tr>
+    </tbody>
+</table>    
+
+    <a class="btn btn-grey" href="/">Перейти к закупкам</a>
+    <button data-bind="click: pageVM.saveAsDraft" class="btn btn-grey">Сохранить как черновик</button>
+    <button data-bind="click: pageVM.publish" class="btn btn-grey">Отправить</button>
+</div>
+
+
+            </div>
+        </div>
+        <!-- Footer Block -->
+
+
+<div class="footer">
+        <div class="footer__columns">
+            <div class="column copyright">
+                © 2018 <a class="footer_link" href="http://zakaz-mo.mosreg.ru/">Комитет по конкурентной политике Московской области</a>
+                <div class="social">
+                    <ul>
+                        <li>
+                            <a href="https://www.facebook.com/KomkonMO" target="_blank">
+                            <span class="icon social-icon facebook">facebook</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.instagram.com/kkp_mo/" target="_blank">
+                            <span class="icon social-icon instagram">instagram</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://twitter.com/rctmo" target="_blank">
+                            <span class="icon social-icon twitter">twitter</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://vk.com/kkp_mo" target="_blank">
+                            <span class="icon social-icon vk">vkontakte</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="column">
+                <ul>
+                    <li>
+                        <a href="/Info" class="footer_link">Информационные и справочные материалы</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="column">
+                <ul>
+                    <li>
+                        <a href="http://easuz.mosreg.ru/" class="footer_link">Портал ЕАСУЗ МО</a>
+                    </li>
+					 <li>
+                        <a href="http://easuz.mosreg.ru/Support" class="footer_link">Служба технической поддержки</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+ 
+
+    </div>
+    
+    <script type="text/javascript">
+        var manageOrgInfoActionLink = '<a class="link-red" href="/Account/GetManageUserInfo">Перейти к редактированию</a>';
+        var publishValidateUserUrl = 'https://api.market.mosreg.ru/api/Trade/Application/ValidateUserPublish';
+        var publishActionUrl = 'https://api.market.mosreg.ru/api/Trade/408828/Application/Publish';
+        var saveAsDraftActionUrl = 'https://api.market.mosreg.ru/api/Trade/408828/Application/SaveAsDraft';
+        var secToken = 'KUnKQFGWdipHWdwTKs8YEbZH-rkQy7DyFws7Nq82UbE202w1KlVEfI-h8WD0Aq8e_WBfAEj9ULhdML3qNLQlM3tQaZwiXppPEVkP9pdqhrkHbRmH4QsMT2SVNEWg7mzACfWbiSoVTvvL6L_QmxlO6DyOSvCAtwKI8qvImQWTbbmVHZZZmA49BBT4CNsYOfeS9R16po4FZbB-v5g1D8GFJxjsGC6o63Z6FQ-s3Ly0mmT9uInDVboD1wr9eZ8E_8eAwu_rFL4pIwIiSAQGDfFM3FTUiJfi4QMOrj7oLx_lZpmLon4Cw9LRZ_1EAQFsDIjMD8Bq2WG3wrjvMot32exv4ivYkudHFuUNEVqt-ZW_OBohHthMTC6OwSuGtvDYBfew5SAoo0QilJfNlpGiqxEXD45P-rNX6e8MfZbdodl3w2sD8pClfAOeN32uEYTdiKtHeS4G3kzFSIik_RT50MzT3aYxX5sE4bxqqosuVoWPwYnH1xCUBpqj_Iu1ImU9YfKwfHRGFcVvGetR4CK3T89pdJgKBCE';
+        var vmApplication = new ApplicationVm();
+
+                
+                var product = new productVM();
+                product.init('166',
+                    'Килограмм',
+                    '01.13.11.02.31',
+                    '01.13.11.02.31 / Корица — высушенная кора (целая или молотая)',
+                    'Koz',
+                    '0,20',
+                    'Корица — высушенная кора (целая или молотая)',
+                    '490,00',
+                    '1',
+                    '157568585',
+                    '1043887');
+                vmApplication.Products.push(product);
+                
+                
+                var product = new productVM();
+                product.init('166',
+                    'Килограмм',
+                    '01.13.02.02.02.01',
+                    '01.13.02.02.02.01 / Мука пшеничная сорта &quot;Экстра&quot;',
+                    'Koz',
+                    '372,00',
+                    'Мука пшеничная сорта \"Экстра\"',
+                    '20,73',
+                    '2',
+                    '157569877',
+                    '1043888');
+                vmApplication.Products.push(product);
+                
+                
+                var product = new productVM();
+                product.init('166',
+                    'Килограмм',
+                    '01.13.11.02.102.02',
+                    '01.13.11.02.102.02 / Укроп (сушеный), Килограмм',
+                    'Koz',
+                    '1,00',
+                    'Укроп (сушеный), Килограмм',
+                    '550,00',
+                    '3',
+                    '157570003',
+                    '1043889');
+                vmApplication.Products.push(product);
+                
+                
+                var product = new productVM();
+                product.init('166',
+                    'Килограмм',
+                    '01.13.03.02.02.05.04',
+                    '01.13.03.02.02.05.04 / Зефир',
+                    'Koz',
+                    '27,00',
+                    'Зефир',
+                    '159,78',
+                    '4',
+                    '157570345',
+                    '1043890');
+                vmApplication.Products.push(product);
+                
+                
+                var product = new productVM();
+                product.init('166',
+                    'Килограмм',
+                    '01.13.02.03.01',
+                    '01.13.02.03.01 / Макароны, изготовленные из муки твердой пшеницы высшего сорта',
+                    'Koz',
+                    '167,00',
+                    'Макароны, изготовленные из муки твердой пшеницы высшего сорта',
+                    '47,51',
+                    '5',
+                    '157571712',
+                    '1043891');
+                vmApplication.Products.push(product);
+                
+                
+                var product = new productVM();
+                product.init('166',
+                    'Килограмм',
+                    '01.13.03.02.01.01.15',
+                    '01.13.03.02.01.01.15 / Конфеты шоколадные без начинки',
+                    'Koz',
+                    '24,00',
+                    'Конфеты шоколадные без начинки',
+                    '267,93',
+                    '6',
+                    '157572019',
+                    '1043892');
+                vmApplication.Products.push(product);
+                
+                
+                var product = new productVM();
+                product.init('166',
+                    'Килограмм',
+                    '01.13.11.02.62.02',
+                    '01.13.11.02.62.02 / Петрушка (сушеная), Килограмм',
+                    'Koz',
+                    '1,00',
+                    'Петрушка (сушеная), Килограмм',
+                    '550,00',
+                    '7',
+                    '157572029',
+                    '1043893');
+                vmApplication.Products.push(product);
+                
+                
+                var product = new productVM();
+                product.init('166',
+                    'Килограмм',
+                    '01.13.11.01.05',
+                    '01.13.11.01.05 / Соль йодированная',
+                    'Koz',
+                    '68,00',
+                    'Соль йодированная',
+                    '10,43',
+                    '8',
+                    '157572481',
+                    '1043894');
+                vmApplication.Products.push(product);
+                
+                
+                var product = new productVM();
+                product.init('166',
+                    'Килограмм',
+                    '01.13.11.02.95',
+                    '01.13.11.02.95 / Приправа универсальная',
+                    'Koz',
+                    '0,70',
+                    'Приправа универсальная',
+                    '252,00',
+                    '9',
+                    '157575221',
+                    '1043895');
+                vmApplication.Products.push(product);
+                
+                
+                var product = new productVM();
+                product.init('166',
+                    'Килограмм',
+                    '01.13.11.02.59.02',
+                    '01.13.11.02.59.02 / Чёрный перец (молотый), Килограмм',
+                    'Koz',
+                    '0,20',
+                    'Чёрный перец (молотый), Килограмм',
+                    '400,00',
+                    '10',
+                    '157575222',
+                    '1043896');
+                vmApplication.Products.push(product);
+                
+                
+                var product = new productVM();
+                product.init('166',
+                    'Килограмм',
+                    '01.13.15.04.02.02',
+                    '01.13.15.04.02.02 / Дрожжи пекарные сушеные (Килограмм)',
+                    'Koz',
+                    '3,30',
+                    'Дрожжи пекарные сушеные (Килограмм)',
+                    '950,00',
+                    '11',
+                    '157575224',
+                    '1043897');
+                vmApplication.Products.push(product);
+                
+                
+                var product = new productVM();
+                product.init('166',
+                    'Килограмм',
+                    '01.13.11.02.58',
+                    '01.13.11.02.58 / Чёрный перец (горошком)',
+                    'Koz',
+                    '0,50',
+                    'Чёрный перец (горошком)',
+                    '1000,00',
+                    '12',
+                    '157577939',
+                    '1043898');
+                vmApplication.Products.push(product);
+                
+                
+                var product = new productVM();
+                product.init('166',
+                    'Килограмм',
+                    '01.13.11.03.04.01',
+                    '01.13.11.03.04.01 / Лимонная кислота',
+                    'Koz',
+                    '0,41',
+                    'Лимонная кислота',
+                    '220,00',
+                    '13',
+                    '157577954',
+                    '1043899');
+                vmApplication.Products.push(product);
+                
+                
+                var product = new productVM();
+                product.init('166',
+                    'Килограмм',
+                    '01.13.15.02.03.02',
+                    '01.13.15.02.03.02 / Крахмал картофельный (Килограмм)',
+                    'Koz',
+                    '26,00',
+                    'Крахмал картофельный (Килограмм)',
+                    '72,00',
+                    '14',
+                    '157579825',
+                    '1043900');
+                vmApplication.Products.push(product);
+                
+        koVMs.pageVM = vmApplication;
+        vmApplication.subscribeProducts();
+        datepickerOptions.minDate = 0;
+</script>
+
+    
+<script type="text/javascript">
+
+
+    ko.applyBindings(koVMs);
+    $(document).mouseup(function (e) {
+        var container = $(".wg-selectbox .options");
+
+        if (!container.is(e.target) // if the target of the click isn't the container...
+            && container.has(e.target).length === 0) // ... nor a descendant of the container
+        {
+            container.hide();
+        }
+    });
+</script>
+
+</body>
+</html>

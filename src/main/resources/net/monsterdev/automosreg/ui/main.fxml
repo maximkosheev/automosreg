@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.web.*?>
+<?import javafx.scene.input.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.monsterdev.automosreg.ui.MainController">
+   <children>
+      <BorderPane fx:id="wrapPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity">
+         <bottom>
+            <HBox>
+               <children>
+                  <Label fx:id="lblStatusText" text="Простой" />
+               </children>
+            </HBox>
+         </bottom>
+         <top>
+            <MenuBar BorderPane.alignment="CENTER">
+               <menus>
+                  <Menu mnemonicParsing="false" text="Файл">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Настройки...">
+                           <accelerator>
+                              <KeyCodeCombination alt="DOWN" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator>
+                        </MenuItem>
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem fx:id="actFileClose" mnemonicParsing="false" onAction="#onFileClose" text="Выйти" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Закупки">
+                     <items>
+                        <MenuItem fx:id="actTradeRefresh" mnemonicParsing="false" onAction="#onTradeRefresh" text="Обновить" />
+                        <SeparatorMenuItem fx:id="act" mnemonicParsing="false" />
+                        <MenuItem fx:id="actTradeNew" mnemonicParsing="false" onAction="#onTradeNew" text="Новая закупка...">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                           </accelerator>
+                        </MenuItem>
+                        <MenuItem fx:id="actTradeEdit" mnemonicParsing="false" onAction="#onTradeEdit" text="Редактировать...">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="E" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                           </accelerator>
+                        </MenuItem>
+                        <MenuItem fx:id="actTradeDelete" mnemonicParsing="false" onAction="#onTradeDelete" text="Удалить выбранные">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="DELETE" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                           </accelerator>
+                        </MenuItem>
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Аукцион">
+                     <items>
+                        <MenuItem fx:id="actTenderStart" mnemonicParsing="false" onAction="#onTenderStart" text="Начать">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="F5" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator>
+                        </MenuItem>
+                        <MenuItem fx:id="actTenderStop" mnemonicParsing="false" onAction="#onTenderStop" text="Остановить">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="F8" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator>
+                        </MenuItem>
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Профиль">
+                     <items>
+                        <MenuItem fx:id="actProfile" mnemonicParsing="false" onAction="#onProfile" text="Учетные данные..." />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Помощь">
+                     <items>
+                        <MenuItem fx:id="actAbout" mnemonicParsing="false" onAction="#onAbout" text="О программе" />
+                     </items>
+                  </Menu>
+               </menus>
+            </MenuBar>
+         </top>
+         <center>
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Предложения на закупки">
+                     <font>
+                        <Font name="Tahoma" size="24.0" />
+                     </font>
+                  </Text>
+                  <HBox spacing="5.0">
+                     <children>
+                        <Label text="Найдено закупок">
+                           <font>
+                              <Font name="Tahoma" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblTradesCount" text="Label">
+                           <font>
+                              <Font name="Tahoma Bold" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <GridPane hgap="5.0" style="-fx-background-color: #e8e8e8;" VBox.vgrow="NEVER">
+                     <children>
+                        <Label text="Дата начала подачи предложений" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                        <HBox alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="5">
+                           <children>
+                              <Button fx:id="btnFilterSaveAs" mnemonicParsing="false" onAction="#onFilterSaveAs" text="Сохранить фильтр как..." />
+                              <Button fx:id="btnFilterApply" defaultButton="true" mnemonicParsing="false" onAction="#onFilterApply" text="Применить" />
+                              <Button fx:id="btnFilterClear" mnemonicParsing="false" onAction="#onFilterClear" text="Отчистить" />
+                           </children>
+                        </HBox>
+                        <TextField fx:id="edtTradeNum" promptText="Номер закупки" GridPane.rowIndex="2" />
+                        <TextField fx:id="edtTradeName" promptText="Наиманование закупки" GridPane.rowIndex="4" />
+                        <HBox alignment="CENTER_LEFT" spacing="5.0" GridPane.rowIndex="5">
+                           <children>
+                              <Label text="Статус" />
+                              <ComboBox fx:id="cmbStatus" prefWidth="150.0" />
+                           </children>
+                        </HBox>
+                        <Label text="Дата окончания подачи предложений" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+                        <HBox alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="1" GridPane.columnSpan="2">
+                           <children>
+                              <Label text="Сохраненные фильтры" />
+                              <ComboBox fx:id="cmbFilters" prefWidth="150.0" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                           <children>
+                              <DatePicker fx:id="dateBeginFrom" promptText="от" />
+                              <DatePicker fx:id="dateBeginTo" promptText="до" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="4">
+                           <children>
+                              <DatePicker fx:id="dateFinishFrom" promptText="от" />
+                              <DatePicker fx:id="dateFinishTo" promptText="до" />
+                           </children>
+                        </HBox>
+                     </children>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="ALWAYS" maxWidth="251.0" minWidth="10.0" percentWidth="50.0" prefWidth="251.0" />
+                        <ColumnConstraints hgrow="NEVER" minWidth="10.0" percentWidth="18.0" prefWidth="75.0" />
+                        <ColumnConstraints hgrow="NEVER" minWidth="10.0" percentWidth="32.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+                  <WebView fx:id="mainView" minHeight="-Infinity" minWidth="-Infinity" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS" />
+                  <HBox alignment="CENTER_RIGHT" spacing="5.0" VBox.vgrow="NEVER">
+                     <children>
+                        <Pagination fx:id="pages" />
+                        <Label text="Позиций:" />
+                        <ComboBox fx:id="cmbItemsPerPage" prefHeight="25.0" prefWidth="72.0" />
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </VBox>
+         </center>
+      </BorderPane>
+   </children>
+</StackPane>

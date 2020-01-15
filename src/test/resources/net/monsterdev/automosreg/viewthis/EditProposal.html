@@ -1,0 +1,1249 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Электронный магазин Московской области</title>
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function (d, w, c) {
+            (w[c] = w[c] || []).push(function () {
+                try {
+                    w.yaCounter49875445 = new Ya.Metrika2({
+                        id: 49875445,
+                        clickmap: true,
+                        trackLinks: true,
+                        accurateTrackBounce: true
+                    });
+                } catch (e) { }
+            });
+
+            var n = d.getElementsByTagName("script")[0],
+                s = d.createElement("script"),
+                f = function () { n.parentNode.insertBefore(s, n); };
+            s.type = "text/javascript";
+            s.async = true;
+            s.src = "https://mc.yandex.ru/metrika/tag.js";
+
+            if (w.opera == "[object Opera]") {
+                d.addEventListener("DOMContentLoaded", f, false);
+            } else { f(); }
+        })(document, window, "yandex_metrika_callbacks2");
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/49875445" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+
+    
+    
+    <link href="/Content/Redesign/css/styleUpdated.min.css" rel="stylesheet" />
+    
+    <link href="/Content/css?v=YvaKA61acS_ZX4pWkkeqhmL7VncVTzaJCra7YbKa9hg1" rel="stylesheet"/>
+
+    <script type="text/template" id="wgtMessageBox">
+    <div class="wgtMessageBox__wrapper">
+        <div class="wgtMessageBox__title"></div>
+        <div class="wgtMessageBox__close" onclick="messageBox().hideMessage()"></div>
+        <div class="wgtMessageBox__content">
+            <ul></ul>
+        </div>
+    </div>
+</script>
+<script type="text/template" id="loadingPanel">
+    <div class="widgetLoadingPanel">
+        <div class="widgetLoadingPanel__overlay"></div>
+        <div class="widgetLoadingPanel__spinner"></div>
+    </div>
+</script>
+
+<script type="text/template" id="wgtMessageBoxChoice">
+    <div class="wgtMessageBoxChoice__wrapper">
+        <div class="wgtMessageBoxChoice__content"></div>
+        <span class="btn-ok">Ок</span><span class="" onclick="messageChoice().hideMessageChoice()">Отмена</span>
+    </div>
+</script>
+
+<script type="text/template" id="confirmModal">
+    <div class="box-modal text-center" id="confirmModal">
+        <div class="box-modal_close decline"><span class="icon-cancel"></span></div>
+        <div class="titleConfirm"><%= title %></div>
+        <div class="btn-group">
+            <a href=""class ="approve btn btn-grey inline">Да</a><a class="decline btn btn-grey inline">Нет</a>
+        </div>       
+    </div>
+</script>
+
+<script type="text/template" id="confirmModalWithComment">
+    <div class="box-modal text-center" id="confirmModal">
+        <div class="box-modal_close arcticmodal-close"><span class="icon-cancel"></span></div>
+        <div class="titleConfirm"><%= title %></div>
+        <div class="auxTitleConfirm"><%= auxtitle %></div>
+        <div class="btn-group">
+            <a href="" class="approve btn btn-grey inline">Да</a><div class="arcticmodal-close btn btn-grey inline">Нет</div>
+        </div>
+    </div>
+</script>
+
+
+<script type="text/template" id="confirmWithReasonModal">
+    <div class="box-modal text-center" id="confirmWithReasonModal">
+        <div class="box-modal_close arcticmodal-close"><span class="icon-cancel"></span></div>
+        <div class="modalWithReasonTitle mainTitleConfirm"><%= title %></div>
+        <div class="modalWithReasonTitle"><span class="required auxiliaryTitleConfirm"><%= auxiliaryTitle %></span></div>
+        <textarea class="confirmationReason" style="width:100%"></textarea>
+        <div class="btn-group">
+            <button class="savebtn btn btn-block">Сохранить</button>
+            <div class="arcticmodal-close btn btn-grey inline">Отменить</div>
+        </div>
+    </div>
+</script>
+
+<script type="text/template" id="refusalDueToRNPModal">
+    <div class="box-modal text-center modal-box-mess" id="refusalDueToRNPModal">
+        <div class="box-modal_close arcticmodal-close"><span class="icon-cancel"></span></div>
+        <div class="modal-mess-basis modal-mess-headline">Внесите данные по поставщику</div>
+        <div class="modal-mess-basis">
+            <p>В соответствии с регламентом Заказчик может отказаться от заключения контракта ТОЛЬКО если поставщик находится в реестре РНП. Нажимая кнопку "Подтвердить" заказчик подтверждает то,что проверил поставщика в РНП и нашел его там.</p>
+        </div>
+        <div class="rnp-label"><span class="required">Ссылка РНП</span></div>
+        <input class="rnp-input linkFromRNP" />
+        <div class="rnp-label"><span class="required">Реестровый номер РНП</span></div>
+        <input class="rnp-input registryNumberInRNP" id="registryNumberInRNP" />
+        <div class="modal-btn-block">
+            <button class="savebtn modal-btn-custom modal-btn-agree">Подтвердить</button>
+            <button class="arcticmodal-close modal-btn-custom modal-btn-cancel">Отменить</button>
+        </div>
+        <div class="modal-mess-basis"><span class="modal-mess-explanation">* В случае выбора "Подтвердить" будет произведен отказ от заключения контракта с данным поставщиком.</span></div>
+    </div>
+</script>
+
+<script type="text/template" id="agreeWithCustomerConditionsQuestionModal">
+    <div class="box-modal text-center modal-box-mess" id="refusalDueToRNPModal">
+        <div class="box-modal_close arcticmodal-close"><span class="icon-cancel"></span></div>
+        <div class="modal-mess-basis modal-mess-headline">Согласие с условиями заявки заказчика</div>
+        <div class="modal-mess-basis"><p>Направляя данное предложение Вы подтверждаете свое согласие на выполнение условий, указанных в данной Заявке Заказчика, в том числе и в Техническом задании.</p>
+                               <p>
+                                   В случае не выполнения указанных в Заявке Заказчика условий и расторжения договора, соответствующие сведения будут отображены для Вашей организации в Рейтинге Поставщиков и в дальнейшем могут отразиться на работе Вашей организации в Электронном магазине.
+                               </p></div>        
+        <div class="modal-btn-block">
+            <button class="approvebtn modal-btn-custom modal-btn-agree">Согласен</button>
+            <button class="arcticmodal-close modal-btn-custom modal-btn-cancel">Не согласен</button>
+        </div>
+        <div class="modal-mess-basis"><span class="modal-mess-explanation">* В случае выбора "Не согласен" возможности подать предложение на заявку заказчика не будет</span></div>
+    </div>
+</script>
+
+<script type="text/template" id="showBoxForMessageModal">
+    <div class="box-modal text-center" id="confirmWithReasonModal">
+        <div class="box-modal_close arcticmodal-close"><span class="icon-cancel"></span></div>
+        <div class="modalWithReasonTitle mainTitleConfirm"><%= title %></div>        
+        <textarea class="confirmationReason" id="boxMessage"></textarea>
+        <div class="btn-group">
+            <button class="savebtn btn btn-block">Отправить</button>
+            <div class="arcticmodal-close btn btn-grey inline">Отменить</div>
+        </div>
+    </div>
+</script>
+
+<script type="text/template" id="confirmDealCancelModal">
+    <div class="box-modal text-center" id="confirmCancelModal">
+        <div class="box-modal_close arcticmodal-close"><span class="icon-cancel"></span></div>
+        <h1 class="titleConfirm">Вы действительно хотите «Отказаться от заключения договора»?</h1>
+        <div class="text-left">
+            <h2>При отказе от заключения договора:</h2>
+            <ul>
+                <li>1) закупка перейдёт в состояние "Согласование" </li>
+                <li>2) текущий договор перейдёт в состояние "Заказчик отказался от подписания"</li>
+                <li>3) предложение перейдёт в статус "Предложение отклонено заказчиком во время заключения договора"</li>
+            </ul>
+        </div>
+        <div class="btn-group">
+            <button class="btn btn-grey yesBtn">Да</button>
+            <div class="arcticmodal-close btn btn-grey">Нет</div>
+        </div>
+    </div>
+</script>
+
+<script type="text/template" id="certificateWindowModal">
+    <div class="box-modal text-center">
+        <div class="modalwindow">
+            <div class="box-modal_close arcticmodal-close"><span class="icon-cancel"></span></div>
+            <h1 class="titleConfirm">Информация о сертификате</h1>
+            <div class="text-left">
+                <h2>Сертификат</h2>
+                <table class="info-table-modal">
+                    <tr class="odd-row">
+                        <td>Дата выдачи сертификата</td>
+                        <td class="localize_datetime"><%= NotBefore %></td>
+                    <tr>
+                    <tr class="even-row">
+                        <td>Срок действия сертификата</td>
+                        <td class="localize_datetime"><%= NotAfter %></td>
+                    <tr>
+                    <tr class="odd-row">
+                        <td>Номер сертификата</td>
+                        <td><a class="link-red" href="<%= DownloadCertUrl %>"><%= CertNumber %></a></td>
+                    <tr>
+                </table>
+                <h2>Подписавший</h2>
+                <table class="info-table-modal">
+                    <tr class="odd-row">
+                        <td>Имя</td>
+                        <td><%= Name %></td>
+                    <tr>
+                    <tr class="even-row">
+                        <td>Фамилия</td>
+                        <td><%= Surname %></td>
+                    <tr>
+                    <tr class="odd-row">
+                        <td>Организация</td>
+                        <td><%= Organization %></td>
+                    <tr>
+                    <tr class="even-row">
+                        <td>Роль</td>
+                        <td><%= Role %></td>
+                    <tr>
+                    <tr class="odd-row">
+                        <td>Email</td>
+                        <td><%= Email %></td>
+                    <tr>
+                    <tr class="even-row">
+                        <td>Департамент</td>
+                        <td><%= Departament %></td>
+                    <tr>
+                    <tr class="odd-row">
+                        <td>Местоположение</td>
+                        <td><%= Location %></td>
+                    <tr>
+                    <tr class="even-row" >
+                        <td>ИНН</td>
+                        <td><%= Inn %></td>
+                    <tr>
+                    <tr class="odd-row">
+                        <td>КПП</td>
+                        <td><%= Kpp %></td>
+                    <tr>
+                    <tr class="even-row">
+                        <td>ОГРН</td>
+                        <td><%= Ogrn %></td>
+                    <tr>
+                </table>
+            </div>
+        </div>
+        <div class="btn-group">
+            <button class="btn btn-grey arcticmodal-close">Закрыть</button>
+        </div>
+    </div>
+</script>
+
+<script type="text/template" id="signingSheetWindowModal">
+    <div class="box-modal text-center first-signing-sheet-window-modal-box">
+        <div class="modalwindow">
+            <div class="box-modal_close arcticmodal-close"><span class="icon-cancel"></span></div>
+            <h1 class="titleConfirm">Лист подписания документов</h1>
+            <div class="text-left">
+                <h2>Сведения о документе</h2>
+                <table class="info-table-modal">
+                    <tr class="odd-row">
+                        <td>Наимнование документа</td>
+                        <td>Контракт</td>
+                    <tr>
+                    <tr class="even-row">
+                        <td>Номер документа</td>
+                        <td><%= DealNumber %></td>
+                    <tr>
+                    <tr class="odd-row">
+                        <td>ID договора в ЭМ</td>
+                        <td><%= DealId %></td>
+                    <tr>
+                    <tr class="even-row">
+                        <td>Предмет контракта</td>
+                        <td><%= SubjectOfContract %></td>
+                    <tr>
+                    <tr class="odd-row">
+                        <td>Заказчик</td>
+                        <td><%= Customer %></td>
+                    <tr>
+                    <tr class="even-row">
+                        <td>Исполнитель</td>
+                        <td><%= Participant %></td>
+                    <tr>
+                    <tr class="odd-row">
+                        <td>Дата заключения</td>
+                        <td class="localize_datetime"><%= ConclusionDate %></td>
+                    <tr>
+                </table>
+                <h2>Сведения о сертификатах, которыми был подписан документ</h2>
+                <div class="box-cert">
+                    <div class="left-block">
+                        <table class="info-table-modal">
+                            <tr class="even-row">
+                                <td>Роль</td>
+                                <td>Исполнитель</td>
+                            <tr>
+                            <tr class="odd-row">
+                                <td>Владелец</td>
+                                <td><%= ParticipantCert.OwnerCustomer %></td>
+                            <tr>
+                            <tr class="even-row">
+                                <td>Номер сертификата</td>
+                                <td><%= ParticipantCert.CertificateSerialNumber %></td>
+                            <tr>
+                            <tr class="odd-row">
+                                <td>Срок действия сертификата</td>
+                                <td><span class="localize_datetime"><%= ParticipantCert.NotBefore %></span> по <span class="localize_datetime"><%= ParticipantCert.NotAfter %></span></td>
+                            <tr>
+                            <tr class="even-row">
+                                <td>Издатель</td>
+                                <td><%= ParticipantCert.NameIssuer %></td>
+                            <tr>
+                        </table>
+                    </div>
+                    <div class="rigth-block">
+                        <table class="info-table-modal">
+                            <tr class="odd-row">
+                                <td>Роль</td>
+                                <td>Заказчик</td>
+                            <tr>
+                            <tr class="even-row">
+                                <td>Владелец</td>
+                                <td><%= CustomerCert.OwnerCustomer %></td>
+                            <tr>
+                            <tr class="odd-row">
+                                <td>Номер сертификата</td>
+                                <td><%= CustomerCert.CertificateSerialNumber %></td>
+                            <tr>
+                            <tr class="even-row">
+                                <td>Срок действия сертификата</td>
+                                <td><span class="localize_datetime"><%= CustomerCert.NotBefore %></span> по <span class="localize_datetime"><%= CustomerCert.NotAfter %></span></td>
+                            <tr>
+                            <tr class="odd-row">
+                                <td>Издатель</td>
+                                <td><%= CustomerCert.NameIssuer %></td>
+                            <tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btn-group">
+            <button class="btn btn-grey arcticmodal-close">Закрыть</button>
+        </div>
+    </div>
+</script>
+
+<script type="text/template" id="confirmLegalPersonPrefillingInfo">
+    <div class="box-modal text-center">
+        <div class="modalwindow">
+            <div class="box-modal_close arcticmodal-close"><span class="icon-cancel"></span></div>
+            <h1 class="titleConfirm">Вы хотите предзаполнить информацию об организации?</h1>
+            <table class="info-table-modal" style="text-align: left;">
+                <tr class="odd-row">
+                    <td>Полное наименование</td>
+                    <td><%= FullName %></td>
+                <tr>
+                <tr class="even-row">
+                    <td>Краткое наименование</td>
+                    <td><%= ShortName %></td>
+                <tr>
+                <tr class="odd-row">
+                    <td>ИНН</td>
+                    <td><%= Inn %></td>
+                <tr>
+                <tr class="even-row">
+                    <td>КПП</td>
+                    <td><%= Kpp %></td>
+                <tr>
+                <tr class="odd-row">
+                    <td>ОГРН</td>
+                    <td><%= Ogrn %></td>
+                <tr>
+                <tr class="even-row">
+                    <td>Адрес места нахождения</td>
+                    <td><%= Address %></td>
+                <tr>
+            </table>
+        </div>
+        <div class="btn-group">
+            <div class="approve btn btn-grey inline">Да</div>
+            <div class="arcticmodal-close btn btn-grey inline">Нет</div>
+        </div>
+    </div>
+</script>
+
+<script type="text/template" id="individualEntrepreneurPrefillingInfo">
+    <div class="box-modal text-center">
+        <div class="modalwindow">
+            <div class="box-modal_close arcticmodal-close"><span class="icon-cancel"></span></div>
+            <h1 class="titleConfirm">Вы хотите предзаполнить информацию об организации?</h1>
+            <table class="info-table-modal" style="text-align: left;">
+                <tr class="odd-row">
+                    <td>ИНН</td>
+                    <td><%= Inn %></td>
+                <tr>
+                <tr class="even-row">
+                    <td>ОГРНИП</td>
+                    <td><%= Ogrn %></td>
+                <tr>
+                <tr class="odd-row">
+                    <td>Адрес места нахождения</td>
+                    <td><%= Address %></td>
+                <tr>
+            </table>
+        </div>
+        <div class="btn-group">
+            <div class="approve btn btn-grey inline">Да</div>
+            <div class="arcticmodal-close btn btn-grey inline">Нет</div>
+        </div>
+    </div>
+</script>
+
+<script type="text/template" id="userAddToOrgMessageBox">
+    <div class="box-modal text-center" id="confirmModal">
+        <div class="box-modal_close decline"><span class="icon-cancel"></span></div>
+        <div class="titleConfirm">
+            Организация «<%= OrgName %>» ИНН <%= Inn %> КПП <%= Kpp %>, уже зарегестрирована в системе.
+            ваша заявка на добавление пользователя будет направлена администратору организации
+            «<%= AdminFulName %>». Если вы впервые регистрируете организацию в системе,
+            то просим вас обратится в службу технической поддержки для выяснения обстоятельств <%= techTupport %>
+        </div>
+        <div class="btn-group">
+            <a href="" class="approve btn btn-grey inline">Направить заявку администрации</a>
+            <a class="decline btn btn-grey inline">Отмена</a>
+        </div>
+    </div>
+</script>
+
+<script type="text/template" id="infoWindowTmplt">
+    <div class="box-modal text-center" id="infoWindowTmplt">
+        <div class="titleConfirm justifyTextAlign"><%= info %></div>
+        <div class="btn-group">
+            <a href="" class="approve btn btn-grey inline">Да</a>
+        </div>
+    </div>
+</script>
+    <script src="/bundles/scripts?v=C8D5HLNs-f704PLjBHYx4KRq3xXsd8QkWA3TwibYUIs1"></script>
+
+    <script src="/bundles/scriptsformainlayout?v=fdtzPuU_lVNR8R90jUek9lgrXWjRaKuSU1cheyabJAw1"></script>
+
+    
+    <style>
+        header {
+            box-sizing: border-box;
+            min-width: 1200px;
+            position: fixed!important;
+        }
+        .registerProcurement {
+            min-width: 1200px;
+            margin-top: 85px;
+        }
+        .wrapper {
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        .leftBlock__logo-link {
+            text-decoration: none;
+        }
+        .leftBlock__burger {
+            padding-top: 9px;
+        }
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        footer {
+            margin-top: auto;
+        }
+        .footer {
+            min-width: 1200px;
+            position: inherit;
+            padding: 25px 0 45px;
+        }
+        .footer__columns {
+            padding-left: 25px;
+        }
+        .fixedActionHeader.fixed {
+            position: initial;
+        }
+        .header__nav .rightBlock__list-li .userSvg {
+            min-width: 23px;
+        }
+
+        .header__leftMenu{
+            width: 394px; box-sizing: border-box; position: fixed; height: 100vh; left: 0; top: 0; overflow-y: auto; background: #fff; box-shadow: 23px 2px 20px rgba(89,89,89,.0886549); padding-left: 50px; padding-top: 30px; display: none; z-index: 2567; flex-direction: column; width: 394px; box-sizing: border-box; position: fixed; height: 100vh; left: 0; top: 0; overflow-y: auto; background: #fff; box-shadow: 23px 2px 20px rgba(89,89,89,.0886549); padding-left: 50px; padding-top: 30px; display: none; z-index: 2567; flex-direction: column;
+
+        }
+        .header__leftMenu-copyright {
+            margin-top: auto;
+        }
+        .header__leftMenu-linkBlock li a:hover {
+            text-decoration: none;
+        }
+    </style>
+    <link rel="SHORTCUT ICON" href="/favicon.ico">
+   
+    
+
+<script type="text/javascript">
+    var signalREnable = false;
+    $.ajaxPrefilter(function (options) {
+        if (options.url.indexOf('https://suggestions.dadata.ru/') === 0) {
+            return;
+        }
+
+        if (!options.beforeSend) {
+            options.beforeSend = function (xhr) {
+                xhr.setRequestHeader('XXX-TenantId-Header',
+                    '2');
+                    xhr.setRequestHeader('Authorization', 'Bearer FrjdOvfmIeOytrIYFi5a_UtUyJ5VkQ1xfqZN6sJncMbvbECwk9TAXfwutaMr8pPxBCm8veu7vQZaCahg88egXmyxlk0el1rdOExoFuoIrvT6mDusINoAXz9oydRnhGlNg10Kb-N8eKzNlO0Dfa1P2fuM81Npu1arEWNGLgN_oRnFwZcbCPTExsLVcYycuFSZpj3ZM-EF-H_w1HlKWbw5irb8A3aYailSLksEFkCg3cEVFLHBHPPIEJ6FyYkwM4RPB2txOCNzipkB0A3sR4u5EsIc9YGl-ZrgJFdfSDJrV95s9hPkNk64hXNMOoXXfhRZOLUejhJrR24k3seDtfNBMy-iE_kIH0Pfh0Q8cFiZCBiPfaC2qB5w5G54yim9bCKuyZbTv1y5akPfVde0gtPYxL_Fi5ZyjJJkPbfCgaVttQVmj2koKVOhyOmDeEuy2zhbYM8jgBh0PiBKE7oRfTttDm2h5IFx1umFLVeo4LahHuez4zAzEB-wyqqqGZLhn3D3dlL2KUfyWJlDmt6B6XbbZv2A-7c');
+            }
+        }
+    });
+
+        
+    $(function () {
+        window.notReadedNotificationsCount = 0;
+        window.waitingForApproveOrderCount = 0;
+
+        window.bubbleRender = function (bubble) {
+            if (bubble.text() === '0' || bubble.text().length === 0) {
+                bubble.hide();
+            }
+            else {
+                bubble.css('display', 'inline-block');
+            }
+        }
+
+        if(signalREnable)
+        {
+            var notificationHubProxy = $.connection.notificationHub;
+
+            notificationHubProxy.client.newNotifications = function (newIncNotificationsCount) {
+                if (!_.isUndefined(window.notReadedNotificationsCount) && window.notReadedNotificationsCount >= 0) {
+                    $(".notification_bubble").text(window.notReadedNotificationsCount + newIncNotificationsCount);
+                    window.notReadedNotificationsCount += newIncNotificationsCount;
+                    window.bubbleRender($(".notification_bubble"));
+                }
+            };
+
+            notificationHubProxy.client.notificationsReaded = function (readedNotificationCount) {
+                if (!_.isUndefined(window.notReadedNotificationsCount) && window.notReadedNotificationsCount > 0) {
+                    $(".notification_bubble").text(window.notReadedNotificationsCount - readedNotificationCount);
+                    window.notReadedNotificationsCount -= readedNotificationCount;
+                    window.bubbleRender($(".notification_bubble"));
+                }
+            };
+        }
+
+        //notificationHubProxy.client.waitingForApproveOrders = function () {
+        //    if (!_.isUndefined(window.waitingForApproveOrderCount) && window.waitingForApproveOrderCount >= 0) {
+        //        $(".order_bubble").text(window.waitingForApproveOrderCount + 1);
+        //        window.waitingForApproveOrderCount += 1;
+        //        window.bubbleRender($(".order_bubble"));
+        //    }
+        //};
+
+        //notificationHubProxy.client.approveRejectOrders = function () {
+        //    if (!_.isUndefined(window.waitingForApproveOrderCount) && window.waitingForApproveOrderCount > 0) {
+        //        $(".order_bubble").text(window.waitingForApproveOrderCount - 1);
+        //        window.waitingForApproveOrderCount -= 1;
+        //        window.bubbleRender($(".order_bubble"));
+        //    }
+        //};
+
+        //notificationHubProxy.client.canceledOrdersByCustomer = function () {
+        //    if (!_.isUndefined(window.waitingForApproveOrderCount) && window.waitingForApproveOrderCount > 0) {
+        //        $(".order_bubble").text(window.waitingForApproveOrderCount - 1);
+        //        window.waitingForApproveOrderCount -= 1;
+        //        window.bubbleRender($(".order_bubble"));
+        //    }
+        //};
+
+        
+
+        
+    });
+
+    
+
+    ajaxHelpers.init('/Account/SignOut');
+    koVMs = {};
+    datepickerOptions = {};
+
+    //глобальный объект, хранящий ресурсы
+    window.resourceObject = {
+        // роли
+        roles: {
+            administrator: 'Administrator',
+            participant: 'Participant',
+            customer: 'Customer'
+        },
+        appStates: {
+            actual: 'Действительно',
+            canceledDueToInactivityOfTheSupplierAtTheConclusionOfTheContract: 'Отменена из-за неактивности поставщика при заключении договора'
+        },
+        appMeetsStates: {
+            notDefined: 'Неопределено',
+            meet: 'Соответствует',
+            doesNotMeet: 'Не соответствует'
+        },
+        //значения перечислений
+        enumValues:
+        {
+            draftTradeStateName: 'Черновик',
+            publishingStateName: 'Публикуется',
+            fillingApplicationsStateName: 'Прием предложений',
+            IdVatRateNotDefined: '0',
+            IdVatRateSubject: '5',
+            IdVatRateNotSubject: '10',
+            IdExcludingVatRate: '15',
+            IdTrdateStateFillingApplication: '15',
+            IdTrdateStateAgreementConditions: '20',
+            IdTrdateStateNotTookPlace: '25',
+            IdTrdateStateDealIsNotConcluded: '55',
+            createdByCustomerStateName: 'Сформировано заказчиком',
+            applicationActualStateName: 'Действительно',
+            orderDraftState: 'Черновик',
+            applicationRefusedConclusionBecauseOfTheRegisterOfUnscrupulousSuppliersStateName: 'Отказался от заключения, поставщик в РНП'
+        },
+
+        dealForm: {
+            paper: 2
+            },
+
+        localization: {
+            dealSignedOutsideEShop: 'Договор заключён вне электронного магазина',
+            yesBoolProperty: 'Да',
+            noBoolProperty: 'Нет'
+        },
+
+        //адреса
+        urls: {
+            urlGetTradeForAdministrator: 'https://api.market.mosreg.ru/api/Administrator/GetTrade',
+            urlUpdateTradeForAdministrator: 'https://api.market.mosreg.ru/api/Administrator/UpdateTradeFillingApplicationEndDate',
+            editPublishedTradeActionUrl: 'https://api.market.mosreg.ru/api/Trade/EditPublishedTrade',
+            editPublishedTradeDateActionUrl: 'https://api.market.mosreg.ru/api/Trade/EditPublishedTradeDates',
+            inviteParticipantUrl: 'https://api.market.mosreg.ru/api/Trade/InviteParticipant',
+            exportToExcelTest: 'https://api.market.mosreg.ru/api/Trade/ExportToExcelTest',
+            saveAsDraftTradeUrl: 'https://api.market.mosreg.ru/api/Trade/SaveAsDraft',
+            publishTradeUrl: 'https://api.market.mosreg.ru/api/Trade/Publish',
+            tradeIndexRedirectUrl: '/Trade',
+            changePasswordUrl: 'https://api.market.mosreg.ru/api/account/changepassword',
+            currentUserInfoUrl: 'https://api.market.mosreg.ru/api/account/manageinfo',
+            saveUserInfoUrl: 'https://api.market.mosreg.ru/api/account/saveuserinfo',
+            saveOrganizationDocumentsUrl: 'https://api.market.mosreg.ru/api/account/SaveOrganizationDocuments',
+            webApiCheckOrganizationExists: 'https://api.market.mosreg.ru/api/Account/CheckOrganizationExists',
+            signDealOutsideUrl: 'https://api.market.mosreg.ru/api/Deal/SignDealOutsideEShop',
+            sendForApproveUrl: 'https://api.market.mosreg.ru/api/Deal/SentForParticipantApprove',
+            repeatedlySendForApproveUrl: 'https://api.market.mosreg.ru/api/Deal/RepeatedlySentForParticipantApprove',
+            changeFormToPaperUrl: 'https://api.market.mosreg.ru/api/Deal/ChangeFormToPaper',
+            getAllParticipantsUrl: 'https://api.market.mosreg.ru/api/participants',
+            cancelDealUrl: 'https://api.market.mosreg.ru/api/Deal/CancelDeal',
+            uiViewUserInfoUrl: '/Account/GetManageUserInfo',
+            uiViewDocsUrl: '/Account/ManageOrganizationDocuments',
+            uiRenewUserClaims: '/Account/RefreshCookies',
+            sendConfirmationEmailUrl: 'https://api.market.mosreg.ru/api/account/SendConfirmationEmail',
+            uiConfirmationEmailSent: '/Account/ConfirmationEmailSent',
+            checkIsCodeExists: 'https://api.market.mosreg.ru/api/Dictionary/IsCodeExists',
+            getClassificatorElementWithoutChildsByCode: 'https://api.market.mosreg.ru/api/Dictionary/GetElementWithoutChildsByCode',
+            getTreeElements: 'https://api.market.mosreg.ru/api/Dictionary',
+            searchByName: 'https://api.market.mosreg.ru/api/Dictionary/GetAllByName',
+            searchByCode: 'https://api.market.mosreg.ru/api/Dictionary/GetAllByCode',
+            getAllChildren: 'https://api.market.mosreg.ru/api/Dictionary/GetAllByParentCodeRecursive',
+            getAllByListOfParentCodes: 'https://api.market.mosreg.ru/api/Dictionary/GetAllByListOfParentCodes',
+            getAllNotificationsUrl: 'https://api.market.mosreg.ru/api/Notification/GetNotifications',
+            removeNotificationsUrl: 'https://api.market.mosreg.ru/api/Notification/RemoveNotifications',
+            removeNotificationUrl: 'https://api.market.mosreg.ru/api/Notification/RemoveNotification',
+            webApiSendNotificationForAddingUserUrl: 'https://api.market.mosreg.ru/api/Notification/SendNotificationForAddingUser',
+            applicationGridUrl: '/Application',
+            applicationDoesntMeetRequirementsUrl: 'https://api.market.mosreg.ru/api/Applications/ApplicationRefuseToConclude',
+            secondRoundForApplicationsUrl: 'https://api.market.mosreg.ru/api/Applications//SecondRoundForApplicationForCreateDeal/tradeId',
+            markAsReadUrl: 'https://api.market.mosreg.ru/api/Notification/MarkNotificationsAsRead',
+            markAsUnReadUrl: 'https://api.market.mosreg.ru/api/Notification/MarkNotificationsAsUnread',
+            webApiUrlUserHasPassword: 'https://api.market.mosreg.ru/api/account/haspassword',
+            webApiUrlUpdateInterests: 'https://api.market.mosreg.ru/api/organization/updateinterests',
+            dealGridUrl: '/Deal',
+            approveCustomerDealUrl: 'https://api.market.mosreg.ru/api/Deal/ApproveCustomerDeal',
+            rejectCustomerDealUrl: 'https://api.market.mosreg.ru/api/Deal/RejectCustomerDeal',
+            concludeApprovedDealUrl: 'https://api.market.mosreg.ru/api/Deal/ConcludeApprovedDeal',
+            webApiGetDataForDealSigningSheetByDealUrl: 'https://api.market.mosreg.ru/api/Deal/GetDataForDealSigningSheetByDeal/dealId',
+            webUIViewParticipantInfoUrl:
+            '/Participant/ViewParticipantInfo?participantId=identifier',
+            webUIViewParticipantInfoUrl2:
+                '/Participant/ViewParticipantInfo2?participantId=identifier',
+            webUIViewCustomerInfoUrl: '/Customer/ViewCustomerInfo?customerId=identifier',
+            webApiGetCustomerByIdUrl: '/Customer/ViewCustomerInfoById?customerId=identifier',
+            webApiGetCustomerByInnUrl: '/Customer/ViewCustomerInfoInn?customerId=identifier',
+            webUIParticipantInterestsUrl: '/Account/GetParticipantOrganizationInterests',
+            webUIEditParticipantInterestsUrl: '/Account/EditParticipantOrganizationInterests',
+            urlCheckOrganizationInteresClassifcators: 'https://api.market.mosreg.ru/api/organization/CheckOrganizationInteresClassifcators',
+            urlClearOrganizationInteres: 'https://api.market.mosreg.ru/api/organization/ClearInterests',
+            removeTradeDraft: 'https://api.market.mosreg.ru/api/Trade',
+            closeWithoutDealsUrl: 'https://api.market.mosreg.ru/api/Trade/tradeId/CloseWithoutDeals',
+            suggestPaperFormSigningUrl: 'https://api.market.mosreg.ru/api/Deal/SuggestPaperFormSigning',
+            activateOfferUrlWebApi: 'https://api.market.mosreg.ru/api/participantoffer/ActivateOffers',
+            participantOfferGridUrl: '/ParticipantOffer',
+            getAllParticipantOrrefUrl: 'https://api.market.mosreg.ru/api/participantoffer/getoffers',
+            getOffersForTradeUrl: 'https://api.market.mosreg.ru/api/participantoffer/GetOffersForTrade',
+            participantOfferPublishUrl: 'https://api.market.mosreg.ru/api/participantoffer/Publish',
+            participantOfferSaveAsDraftUrl: 'https://api.market.mosreg.ru/api/participantoffer/SaveAsDraft',
+            webApiRemoveParticipantOffersUrl: 'https://api.market.mosreg.ru/api/participantoffer/remove',
+            viewParticipantOfferInfoUrl: '/ParticipantOffer/ViewOffer?id=identifier',
+            webApiDeactivateParticipantOffersUrl: 'https://api.market.mosreg.ru/api/participantoffer/DeactivateOffers',
+            WebApiCheckOffersBelongsOneParticipantUrl: 'https://api.market.mosreg.ru/api/participantoffer/CheckOffersBelongsOneParticipant',
+            WebApiGetParticipantOffersInfoUrl: 'https://api.market.mosreg.ru/api/participantoffer/offerIds/GetOffersInfo',
+            WebApiWebApiGetListCategoryUrlUrl: 'https://api.market.mosreg.ru/api/TradeCategory/GetListCategory',
+            revokeApplicationUrl: 'https://api.market.mosreg.ru/api/Applications/applicationId/Revoke',
+            removeApplicationDraft: 'https://api.market.mosreg.ru/api/Trade/tradeId/Application/applicationId',
+            editPublishedApplicationActionUrl: 'https://api.market.mosreg.ru/api/Application/EditPublished',
+            createApplicationsActionUrl: 'https://api.market.mosreg.ru/api/Trade/tradeId/CreateApplicationsByCustomer',
+            editApplicationUIrl: '/Application/Edit' +
+                "?tradeId=idOfTrade&applicationId=idOfApplication",
+
+            editPriceApplicationUIrl: '/Application/EditPrice' +
+                "?applicationId=idOfApplication",
+
+            webApiMakeCustomerToCustomerAndParticipantUrl: 'https://api.market.mosreg.ru/api/account/MakeCustomerToCustomerAndParticipant',
+            webApiGetAllUsersForOrganizationUrl: 'https://api.market.mosreg.ru/api/account/GetAllUsersForOrganization',
+            webApiMakeUsersNotOrgAdminForOrganizationUrl: 'https://api.market.mosreg.ru/api/account/MakeUsersNotOrgAdminForOrganization',
+            webApiMakeUsersOrgAdminForOrganizationUrl: 'https://api.market.mosreg.ru/api/account/MakeUsersOrgAdminForOrganization',
+            webApiBlockUsersForOrganizationUrl: 'https://api.market.mosreg.ru/api/account/BlockUsersForOrganization',
+            webApiUnBlockUsersForOrganizationUrl: 'https://api.market.mosreg.ru/api/account/UnBlockUsersForOrganization',
+            WebApiFinishReviewApplicationUrl: 'https://api.market.mosreg.ru/api/Trade/FinishReviewApplication',
+            editTradeUrl: '/Trade/Edit' + "?Id=idOfTrade",
+            editTradeDatesUrl: '/Trade/EditDates' + "?Id=idOfTrade",
+            editTradeDateFillingApplicationsUrl: '/Trade/EditDateFillingApplication' + "?Id=idOfTrade",
+            revokeTradeUrl: 'https://api.market.mosreg.ru/api/Trade/tradeId/RevokeTrade',
+            webApiUpdateOrganizationSettings: 'https://api.market.mosreg.ru/api/organization/updateSettings',
+            webApiGetTimeZonesList: 'https://api.market.mosreg.ru/api/common/gettimezonelist',
+            webUIGetManageInfo: '/Account/GetManageUserInfo',
+            webUIViewOrganizationSettings: '/Account/ViewOrganizationSettings',
+            administratorGetWhiteEmails: 'https://api.market.mosreg.ru/api/Administrator/UpdateWhiteEmails',
+            webApiAddCodeToOrgInterestsUrl: 'https://api.market.mosreg.ru/api/organization/addcodetoorganizationinterests',
+            certificateListPage: '/Account/CertificateList',
+            getDataToSignByParticipantForDealUrl: 'https://api.market.mosreg.ru/api/Deal/GetDataToSignByParticipantForDeal',
+            getDataToSignByCustomerForDealUrl: 'https://api.market.mosreg.ru/api/Deal/GetDataToSignByCustomerForDeal',
+            getDataForDealDocumentSignedByCustomer: 'https://api.market.mosreg.ru/api/Deal/GetDataForDealDocumentSignedByCustomer',
+            getDataForDealDocumentSignedByParticipant: 'https://api.market.mosreg.ru/api/Deal/GetDataForDealDocumentSignedByParticipant',
+            getCertificateInfo: 'https://api.market.mosreg.ru/api/account/GetCertificateInfo',
+            tradesToExcelUrl: 'https://api.market.mosreg.ru/api/Trade/ExportToExcel',
+            dealsToExcelUrl: 'https://api.market.mosreg.ru/api/Deal/ExportToExcel',
+            customersToExcelUrl: 'https://api.market.mosreg.ru/api/Customers/ExportToExcel',
+            orderIndexRedirectUrl: '/Order',
+            webApiSaveAsDraftOrderUrl: 'https://api.market.mosreg.ru/api/Order/SaveAsDraft',
+            webApiSendOrderToParticipantUrl: 'https://api.market.mosreg.ru/api/Order/SendToParticipant',
+            editOrderurl: '/Order/Edit' + '?id=idOfOrder',
+            webApiCancelOrderUrl: 'https://api.market.mosreg.ru/api/Order/idOfOrder/CancelOrder',
+            WebApiApproveOrderByParticipantUrl: 'https://api.market.mosreg.ru/api/Order/ApproveByParticipant',
+            WebApiRejectOrderByParticipantUrl: 'https://api.market.mosreg.ru/api/Order/RejectByParticipant',
+            WebApiSignPaperDealUrl: 'https://api.market.mosreg.ru/api/Deal/SignPaperDeal',
+            WebApiProcessNotSignedDealAfterSevenDaysUrl: 'https://api.market.mosreg.ru/api/Deal/ProcessNotSignedDealAfterSevenDays',
+            WebApiWebApiCommentToTheCustomerUrlUrl: 'https://api.market.mosreg.ru/api/Deal/CommentToTheCustomer',
+            webUiViewDealByTrade: '/Deal/ViewDealByTrade',
+            webUiViewDeal: '/Deal/ViewDeal',
+            webUiViewTrade: '/Trade/ViewTrade',
+            createDealOutEShop: '/Deal/CreateDealOutside',
+
+            suggestionsServiceUrl: 'https://suggestions.dadata.ru/suggestions/api/4_1/rs',
+            suggestionsToken: '9b670c4aba429375079bcc7b0c43cf92b5f7219a',
+            editDealChangingFormToPaperUrl: '/Deal/ChangeDealForm' + "?dealId=idOfDeal",
+            getAllOrganizationsUrl: 'https://api.market.mosreg.ru/api/Organizations',
+            webUIDownloadFileUrl: '/File/DownloadCertificate' + '?url=urlparam',
+            webApiGetShortParticipantInfo: 'https://api.market.mosreg.ru/api/participants/participantshortinfo',
+            webApiValidatePhysicalPersonAgreementUrl: 'https://api.market.mosreg.ru/api/account/CreatePhysicalPersonAgreement',
+            webApiProlongateTradeUrl: 'https://api.market.mosreg.ru/api/trade/prolongatenottookedplacetrade'
+        },
+
+        consts:
+        {
+            AnUnexpectedErrorHasOccurred:'Возникла непредвиденная ошибка',
+            maxDisplayedCellContentLength: 60,
+            threeDots: " ...",
+            decimalRegExp: /^(\d+((\.|\,)?\d{0,2}|(\.|\,)\d{0,2}))$/g,
+            decimalRegExp11: /^(\d+((\.|\,)?\d{0,2}|(\.|\,)\d{0,11}))$/g,
+            intRegExp: /^\d+$/g,
+            emailRegExp: /^([a-zA-Z0-9\-\._]*\@?[a-zA-Z0-9\-_]*\.?[a-zA-Z0-9\-_]*)$/g
+        }
+    };
+    var cryptoProBrowserPluginProviderAsyncUrl = '/Scripts/CryptoProBrowserPluginProviderAsync?v=_-7nI1vcSrASeTBOp7cxOZdclSym5RY4CAR_Zj6mjjQ1\
+';
+    var cryptoProBrowserPluginProviderSyncUrl = '/Scripts/CryptoProBrowserPluginProviderSync?v=JZUanaask544lK_74xi9DknTBBGnkO87Jj4bYjiKIpA1\
+';
+</script>
+
+
+</head>
+<body>
+    <header class="header">
+    <div class="overlay"></div>
+    <div class="header__leftMenu">
+    <p class="header__leftMenu-buttonClose">
+        <svg class="burgerСlose"
+             width="17"
+             height="17"
+             viewBox="0 0 17 17"
+             fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M1.70711 0.292893C1.31658 -0.0976311 0.683417 -0.0976311 0.292893 0.292893C-0.097631 0.683417 -0.0976308 1.31658 0.292893 1.70711L6.65685 8.07107L0.292894 14.435C-0.0976306 14.8256 -0.0976308 15.4587 0.292893 15.8492C0.683418 16.2398 1.31658 16.2398 1.70711 15.8492L8.07107 9.48528L14.435 15.8492C14.8256 16.2398 15.4587 16.2398 15.8492 15.8492C16.2398 15.4587 16.2398 14.8256 15.8492 14.435L9.48528 8.07107L15.8492 1.70711C16.2398 1.31658 16.2398 0.683417 15.8492 0.292893C15.4587 -0.0976311 14.8256 -0.0976311 14.435 0.292893L8.07107 6.65685L1.70711 0.292893Z"
+                  fill="#2148B1" />
+        </svg>
+    </p>
+    <h4 class="header__leftMenu-h4">Электронный магазин</h4>
+    <ul class="header__leftMenu-linkBlock">
+                <li><a href="/Trade">Закупки</a></li>
+                <li><a href="/Application">Предложения на закупки</a></li>
+                <li><a href="/ParticipantOffer">Предложения о продаже</a></li>
+                <li><a href="/ParticipantOffer/MedicineOffers">Аптека</a></li>
+                <li><a href="/Deal">Договоры</a></li>
+                <li><a href="/Notification">Уведомления</a></li>
+                    <li><a href="/Participant">Реестр поставщиков</a></li>
+                    <li><a href="/Customer">Реестр заказчиков</a></li>
+    </ul>
+
+    <h4 class="header__leftMenu-h4">О площадке</h4>
+    <ul class="header__leftMenu-linkBlock">
+        <li><a href="/Info">Информационные материалы</a></li>
+        <li><a href="http://easuz.mosreg.ru/" target="_blank">Портал ЕАСУЗ МО</a></li>
+    </ul>
+    <h4 class="header__leftMenu-h4">Помощь</h4>
+    <ul class="header__leftMenu-linkBlock">
+        <li><a href="http://easuz.mosreg.ru/Support?target=em" target="_blank">Создать обращение в техническую поддержку</a></li>
+    </ul>
+    <h4 class="header__leftMenu-h4">Личный кабинет</h4>
+    <ul class="header__leftMenu-linkBlock">
+                <li><a href="/Account/GetManageUserInfo">Кощеев Максим Евгеньевич</a></li>
+<form action="/Account/SignOut" class="navbar-right" id="logoutFormMobile" method="post">                <li><input name="__RequestVerificationToken" type="hidden" value="snYui5F4I7e3LmWs2o8m3nxuJG6PtEeLXwlpOILHXve-B96SzXaDtrl513qyS_kkVRCet98lALfUAq8vtFcSxEb9lLmv6uu5y3parRLSLl9flNL2OdYGOChN0yw2DOK5nN8LclnxdZwqvOomliKckw2" /><a href="javascript:document.getElementById('logoutForm').submit()">Выход</a></li>
+</form>    </ul>
+    <p class="header__leftMenu-copyright"><a href="http://zakaz-mo.mosreg.ru/" target="_blank">©2019 Комитет по конкурентной политике Московской области</a></p>
+</div>
+
+    <div class="wrapper">
+        <nav class="header__nav">
+            <div class="header__nav-leftBlock leftBlock" style="box-sizing: border-box;">
+                <p class="leftBlock__burger">
+                    <svg class="leftBlock__burger-line"
+                         width="22"
+                         height="16"
+                         viewBox="0 0 22 16"
+                         fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <rect width="22" height="2" rx="1" fill="#2148B1" />
+                        <rect y="7" width="22" height="2" rx="1" fill="#2148B1" />
+                        <rect y="14" width="22" height="2" rx="1" fill="#2148B1" />
+                    </svg>
+                </p>
+                <div class="leftBlock__logo">
+                    <a href="/" class="leftBlock__logo-link">
+                        <img class="leftBlock__logo-img" src="/Content/Redesign/img/logo.svg" alt="" />
+                        <span>Электронный магазин <br> Московской области</span>
+                    </a>
+                </div>
+                <ul class="leftBlock__list">
+                <li class="leftBlock__list-li">
+
+                    <a href="/Trade">Закупки</a>
+                </li>
+                <li class="leftBlock__list-li">
+
+                    <a href="/Application">Предложения на закупки</a>
+                </li>
+                <li class="leftBlock__list-li">
+
+                    <a href="/ParticipantOffer">Предложения о продаже</a>
+                </li>
+                <li class="leftBlock__list-li pharmacy">
+
+                    <a href="/ParticipantOffer/MedicineOffers">
+                        <svg width="23px" height="23px" id="Capa_1" style="enable-background:new 0 0 417.074 417.074;" version="1.1" viewBox="0 0 417.074 417.074" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g><g id="Guides_For_Artboard_20_"></g><g id="Artwork_19_"></g><g id="Layer_2_19_"><g><path d="M165.401,139.394c0.869-2.422,3.305-3.914,5.858-3.58c2.552,0.332,4.527,2.397,4.746,4.961     l8.747,102.192l16.379-59.038c0.67-2.414,2.882-4.072,5.396-4.009c2.503,0.055,4.65,1.803,5.213,4.243l9.121,39.569     l15.573-65.431c0.608-2.56,2.957-4.313,5.582-4.201c2.628,0.125,4.797,2.103,5.163,4.708l11.622,82.857l5.21-16.84     c0.71-2.292,2.83-3.854,5.229-3.854h123.254v-28.214c0-26.045-21.116-47.166-47.176-47.166h-74.883V70.706     c0-26.057-21.115-47.17-47.17-47.17H196.02h-4.298c-26.049,0-47.176,21.114-47.176,47.17v74.884H69.659     c-26.036,0-47.162,21.121-47.162,47.166v28.816h113.416L165.401,139.394z" style="fill:#5BB046;"></path><path d="M262.013,268.313c-0.759,2.448-3.12,4.046-5.668,3.838c-2.556-0.208-4.626-2.157-4.981-4.697     l-10.997-78.4L226.1,248.999c-0.587,2.466-2.791,4.207-5.324,4.207c-0.006,0-0.013,0-0.02,0c-2.542-0.01-4.743-1.767-5.314-4.245     l-9.525-41.325l-18.748,67.576c-0.664,2.387-2.836,4.009-5.271,4.009c-0.169,0-0.339-0.008-0.51-0.022     c-2.639-0.246-4.722-2.344-4.947-4.984l-9.203-107.526l-22.319,62.207c-0.78,2.176-2.841,3.625-5.152,3.625H23.226     c3.89,22.131,23.2,38.951,46.435,38.951h74.887v74.886c0,26.057,21.127,47.18,47.176,47.18h4.298h27.245     c26.055,0,47.17-21.124,47.17-47.18v-74.886h74.883c23.467,0,42.916-17.125,46.556-39.553h-118.6L262.013,268.313z" style="fill:#5BB046;"></path><path d="M411.603,220.971h-19.108H269.241c-2.399,0-4.52,1.563-5.229,3.854l-5.21,16.84l-11.622-82.857     c-0.366-2.605-2.535-4.583-5.163-4.708c-2.625-0.112-4.974,1.641-5.582,4.201l-15.573,65.431l-9.121-39.569     c-0.563-2.44-2.71-4.188-5.213-4.243c-2.514-0.063-4.726,1.596-5.396,4.009l-16.379,59.038l-8.747-102.192     c-0.219-2.564-2.194-4.63-4.746-4.961c-2.554-0.334-4.989,1.158-5.858,3.58l-29.486,82.179H22.499H5.474     c-3.023,0-5.474,2.451-5.474,5.475c0,3.022,2.45,5.473,5.474,5.473h17.752h116.539c2.312,0,4.372-1.449,5.152-3.625     l22.319-62.207l9.203,107.526c0.226,2.64,2.309,4.738,4.947,4.984c0.171,0.014,0.341,0.022,0.51,0.022     c2.436,0,4.607-1.622,5.271-4.009l18.748-67.577l9.525,41.325c0.571,2.479,2.772,4.235,5.314,4.245c0.007,0,0.014,0,0.02,0     c2.533,0,4.737-1.74,5.324-4.207l14.267-59.944l10.997,78.4c0.355,2.54,2.426,4.49,4.981,4.697     c2.548,0.208,4.909-1.39,5.668-3.838l11.263-36.396h118.599h19.729c3.022,0,5.472-2.45,5.472-5.473     C417.075,223.421,414.626,220.971,411.603,220.971z" style="fill:#fff;"></path></g></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
+                       <span>Аптека</span>
+                    </a>
+                </li>
+                <li class="leftBlock__list-li">
+
+                    <a href="/Deal">Договоры</a>
+                </li>
+                <li class="leftBlock__list-li">
+
+                    <a href="/Notification">Уведомления</a>
+                </li>
+            <li class="leftBlock__list-li dropdown">
+                <span class="dropdown__clickText">Реестры</span>
+                <svg version="1.1" height="7" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                     viewBox="0 0 488.076 488.076" style="enable-background:new 0 0 488.076 488.076;" xml:space="preserve">
+                <g>
+                <g>
+                <path fill="#2148B1" d="M0,49.017c0-13.824,11.207-25.03,25.03-25.03h438.017c13.824,0,25.029,11.207,25.029,25.03L262.81,455.745
+                        c0,0-18.772,18.773-37.545,0C206.494,436.973,0,49.017,0,49.017z" />
+
+
+
+                        </g>
+                    </g>
+                </svg>
+                <ul class="dropdownMenu">
+                        <li><a href="/Participant">Реестр поставщиков</a></li>
+                        <li><a href="/Customer">Реестр заказчиков</a></li>
+                </ul>
+            </li>
+</ul>
+
+            </div>
+            <div class="header__nav-rightBlock rightBlock" style="box-sizing: border-box;">
+                <ul class="rightBlock__list">
+                    <li class="rightBlock__list-li">
+    <svg class="userSvg"
+         width="23"
+         height="23"
+         viewBox="0 0 23 23"
+         fill="none"
+         xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M3.48935 20.3594H6.39354C6.8466 20.3594 7.21386 20.7266 7.21386 21.1797C7.21386 21.6327 6.8466 22 6.39354 22H3.48935C2.73758 22 2.03444 21.6656 1.5603 21.0825C1.08374 20.4966 0.898927 19.7355 1.05323 18.9945C1.54554 16.6297 2.84971 14.4776 4.72544 12.9347C5.74845 12.0933 6.9174 11.4555 8.16308 11.0455C6.80337 10.0272 5.92186 8.40369 5.92186 6.57812C5.92186 3.50236 8.42419 1 11.5 1C14.5758 1 17.0781 3.50236 17.0781 6.57812C17.0781 8.40205 16.1981 10.0243 14.8405 11.0427C14.9779 11.088 15.1146 11.1357 15.2504 11.1868C15.6746 11.346 15.8893 11.819 15.73 12.2431C15.5707 12.6672 15.0978 12.882 14.6737 12.7227C13.7259 12.3668 12.7303 12.1751 11.7109 12.1519C11.6408 12.1545 11.5706 12.1562 11.5 12.1562C11.43 12.1562 11.3604 12.1545 11.2909 12.1519C7.12227 12.2489 3.51125 15.2371 2.6594 19.3289C2.6062 19.5843 2.66957 19.8462 2.83314 20.0474C2.92789 20.1639 3.13916 20.3594 3.48935 20.3594ZM11.5 2.64062C9.32883 2.64062 7.56249 4.40696 7.56249 6.57812C7.56249 8.68477 9.22551 10.4102 11.3077 10.5109C11.3717 10.5097 11.4358 10.5088 11.5 10.5088C11.564 10.5088 11.6278 10.5098 11.6917 10.5109C13.7741 10.4105 15.4375 8.68497 15.4375 6.57812C15.4375 4.40696 13.6712 2.64062 11.5 2.64062Z"
+              fill="#2148B1" />
+        <path d="M1.5603 21.0825L1.5991 21.051L1.59909 21.051L1.5603 21.0825ZM1.05323 18.9945L1.10218 19.0047L1.10218 19.0047L1.05323 18.9945ZM4.72544 12.9347L4.69368 12.8961L4.72544 12.9347ZM8.16308 11.0455L8.17872 11.093L8.26985 11.063L8.19305 11.0054L8.16308 11.0455ZM14.8405 11.0427L14.8105 11.0027L14.7338 11.0602L14.8248 11.0902L14.8405 11.0427ZM15.2504 11.1868L15.2328 11.2336L15.2328 11.2336L15.2504 11.1868ZM15.73 12.2431L15.6832 12.2255L15.6832 12.2255L15.73 12.2431ZM14.6737 12.7227L14.6913 12.6759L14.6913 12.6759L14.6737 12.7227ZM11.7109 12.1519L11.712 12.1018L11.709 12.1019L11.7109 12.1519ZM11.2909 12.1519L11.2928 12.1019L11.2898 12.102L11.2909 12.1519ZM2.6594 19.3289L2.70835 19.3391L2.70835 19.339L2.6594 19.3289ZM2.83314 20.0474L2.79434 20.0789L2.79435 20.079L2.83314 20.0474ZM11.3077 10.5109L11.3052 10.5609L11.3086 10.5609L11.3077 10.5109ZM11.6917 10.5109L11.6908 10.561L11.6941 10.5609L11.6917 10.5109ZM6.39354 20.3094H3.48935V20.4094H6.39354V20.3094ZM7.26386 21.1797C7.26386 20.699 6.87422 20.3094 6.39354 20.3094V20.4094C6.81899 20.4094 7.16386 20.7542 7.16386 21.1797H7.26386ZM6.39354 22.05C6.87422 22.05 7.26386 21.6604 7.26386 21.1797H7.16386C7.16386 21.6051 6.81899 21.95 6.39354 21.95V22.05ZM3.48935 22.05H6.39354V21.95H3.48935V22.05ZM1.52151 21.1141C2.00515 21.7088 2.72253 22.05 3.48935 22.05V21.95C2.75262 21.95 2.06374 21.6224 1.5991 21.051L1.52151 21.1141ZM1.00428 18.9843C0.846916 19.74 1.03543 20.5164 1.52151 21.1141L1.59909 21.051C1.13205 20.4767 0.950937 19.731 1.10218 19.0047L1.00428 18.9843ZM4.69368 12.8961C2.8092 14.4462 1.49892 16.6082 1.00428 18.9843L1.10218 19.0047C1.59215 16.6511 2.89022 14.509 4.7572 12.9733L4.69368 12.8961ZM8.14745 10.998C6.89598 11.41 5.72154 12.0506 4.69368 12.8961L4.7572 12.9733C5.77536 12.1359 6.93882 11.5011 8.17872 11.093L8.14745 10.998ZM5.87186 6.57812C5.87186 8.42016 6.76138 10.0582 8.13311 11.0855L8.19305 11.0054C6.84536 9.99619 5.97186 8.38722 5.97186 6.57812H5.87186ZM11.5 0.95C8.39657 0.95 5.87186 3.47475 5.87186 6.57812H5.97186C5.97186 3.52998 8.4518 1.05 11.5 1.05V0.95ZM17.1281 6.57812C17.1281 3.47475 14.6034 0.95 11.5 0.95V1.05C14.5482 1.05 17.0281 3.52998 17.0281 6.57812H17.1281ZM14.8705 11.0827C16.2401 10.0553 17.1281 8.4185 17.1281 6.57812H17.0281C17.0281 8.38559 16.1561 9.9933 14.8105 11.0027L14.8705 11.0827ZM15.268 11.14C15.1315 11.0887 14.9941 11.0407 14.8561 10.9952L14.8248 11.0902C14.9617 11.1353 15.0978 11.1828 15.2328 11.2336L15.268 11.14ZM15.7768 12.2607C15.9458 11.8107 15.718 11.3089 15.268 11.14L15.2328 11.2336C15.6311 11.3831 15.8328 11.8273 15.6832 12.2255L15.7768 12.2607ZM14.6561 12.7695C15.1061 12.9385 15.6079 12.7106 15.7768 12.2607L15.6832 12.2255C15.5336 12.6238 15.0895 12.8255 14.6913 12.6759L14.6561 12.7695ZM11.7098 12.2018C12.7235 12.225 13.7137 12.4156 14.6561 12.7695L14.6913 12.6759C13.7382 12.318 12.737 12.1253 11.712 12.1019L11.7098 12.2018ZM11.5 12.2063C11.5714 12.2063 11.6423 12.2045 11.7128 12.2018L11.709 12.1019C11.6394 12.1045 11.5698 12.1062 11.5 12.1062V12.2063ZM11.2891 12.2019C11.3589 12.2045 11.4292 12.2063 11.5 12.2063V12.1062C11.4308 12.1062 11.3618 12.1045 11.2928 12.102L11.2891 12.2019ZM2.70835 19.339C3.55544 15.2702 7.14655 12.2984 11.2921 12.2019L11.2898 12.102C7.09798 12.1995 3.46707 15.204 2.61045 19.3187L2.70835 19.339ZM2.87194 20.0159C2.71792 19.8264 2.6582 19.5799 2.70835 19.3391L2.61045 19.3187C2.55421 19.5888 2.62122 19.866 2.79434 20.0789L2.87194 20.0159ZM3.48935 20.3094C3.15993 20.3094 2.96151 20.126 2.87194 20.0159L2.79435 20.079C2.89427 20.2018 3.11839 20.4094 3.48935 20.4094V20.3094ZM7.61249 6.57812C7.61249 4.43458 9.35644 2.69062 11.5 2.69062V2.59063C9.30121 2.59063 7.51249 4.37935 7.51249 6.57812H7.61249ZM11.3101 10.4609C9.25442 10.3616 7.61249 8.65795 7.61249 6.57812H7.51249C7.51249 8.71159 9.19659 10.4589 11.3053 10.5608L11.3101 10.4609ZM11.5 10.4588C11.4354 10.4588 11.3709 10.4597 11.3068 10.4609L11.3086 10.5609C11.3726 10.5597 11.4363 10.5588 11.5 10.5588V10.4588ZM11.6926 10.4609C11.6287 10.4598 11.5644 10.4588 11.5 10.4588V10.5588C11.5635 10.5588 11.627 10.5598 11.6908 10.5609L11.6926 10.4609ZM15.3875 6.57812C15.3875 8.65815 13.7452 10.3619 11.6893 10.461L11.6941 10.5609C13.8031 10.4592 15.4875 8.7118 15.4875 6.57812H15.3875ZM11.5 2.69062C13.6435 2.69062 15.3875 4.43458 15.3875 6.57812H15.4875C15.4875 4.37935 13.6988 2.59063 11.5 2.59063V2.69062Z"
+              fill="#2148B1" />
+        <path fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M21.372 15.1343C21.0209 14.3488 20.2299 13.8399 19.355 13.8379H16.7968C16.795 13.8379 16.7932 13.8379 16.7914 13.8379C15.8685 13.8379 15.0634 14.3818 14.7394 15.2245C14.6963 15.3366 14.6436 15.4779 14.5886 15.6426H9.21775C8.99597 15.6426 8.78368 15.7324 8.62917 15.8915L7.22004 17.3429C6.90967 17.6626 6.91123 18.1716 7.22353 18.4893L8.65907 19.95C8.81329 20.1069 9.02411 20.1953 9.24412 20.1953H11.9101C12.3632 20.1953 12.7304 19.828 12.7304 19.375C12.7304 18.9219 12.3632 18.5546 11.9101 18.5546H9.58808L8.95529 17.9108L9.56466 17.2832H15.2039C15.5819 17.2832 15.9108 17.025 16.0007 16.658C16.0671 16.387 16.1503 16.1264 16.2708 15.8132C16.3502 15.6066 16.5496 15.4785 16.7933 15.4785C16.7939 15.4785 16.7944 15.4785 16.7949 15.4785H19.3531C19.5851 15.479 19.7848 15.6037 19.8742 15.8039C20.0944 16.2965 20.3574 17.0593 20.3594 17.8951C20.3613 18.7371 20.0987 19.5173 19.8779 20.0235C19.7889 20.2277 19.5875 20.3594 19.3627 20.3594C19.3623 20.3594 19.3618 20.3594 19.3614 20.3594H16.7722C16.5453 20.3588 16.3327 20.2128 16.2433 19.9961C16.1474 19.7635 16.0642 19.4979 15.9891 19.1841C15.8837 18.7435 15.4409 18.4718 15.0005 18.5772C14.5598 18.6827 14.2881 19.1253 14.3936 19.5659C14.4888 19.9637 14.5978 20.309 14.7267 20.6216C15.0712 21.4568 15.8726 21.9979 16.7704 22H19.3595C19.3612 22 19.3629 22 19.3646 22C20.2404 21.9999 21.0318 21.4819 21.3818 20.6792C21.6653 20.0291 22.0026 19.0176 22 17.8912C21.9974 16.7678 21.657 15.7719 21.372 15.1343Z"
+              fill="#2148B1"
+              stroke="#2148B1"
+              stroke-width="0.1" />
+        <path fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M18.6777 18.7188C19.1308 18.7188 19.498 18.3515 19.498 17.8984C19.498 17.4454 19.1308 17.0781 18.6777 17.0781C18.2247 17.0781 17.8574 17.4454 17.8574 17.8984C17.8574 18.3515 18.2247 18.7188 18.6777 18.7188Z"
+              fill="#2148B1"
+              stroke="#2148B1"
+              stroke-width="0.1" />
+    </svg>
+<a href="/Account/GetManageUserInfo">Кощеев Максим Евгеньевич</a></li>
+                    <li class="rightBlock__list-li">
+    <svg class="enterSvg"
+         width="22"
+         height="20"
+         viewBox="0 0 22 20"
+         fill="none"
+         xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M6 1.00842H18.5C19.8806 1.00842 21 2.15871 21 3.57745V16.4226C21 17.8413 19.8806 18.9916 18.5 18.9916H6C4.61938 18.9916 3.5 17.8413 3.5 16.4226V13.8536H4.75V16.4226C4.75 17.1323 5.30938 17.7071 6 17.7071H18.5C19.1906 17.7071 19.75 17.1317 19.75 16.4226V3.57745C19.75 2.8684 19.1906 2.29294 18.5 2.29294H6C5.30938 2.29294 4.75 2.8684 4.75 3.57745V6.14648H3.5V3.57745C3.5 2.15871 4.61938 1.00842 6 1.00842ZM11.8394 14.9172C11.595 14.6667 11.595 14.2602 11.8394 14.009L15.1162 10.6423H1.625C1.28 10.6423 1 10.3546 1 10C1 9.6455 1.28 9.35777 1.625 9.35774H15.1162L11.8394 5.99039C11.595 5.73994 11.595 5.33339 11.8394 5.08227C12.0831 4.83114 12.4794 4.83114 12.7231 5.08227L17.035 9.51319C17.165 9.64678 17.2207 9.82402 17.2119 9.99936C17.2207 10.1741 17.165 10.352 17.035 10.4856L12.7231 14.9172C12.4794 15.1683 12.0838 15.1683 11.8394 14.9172Z"
+              fill="#2148B1" />
+        <path d="M3.5 13.8536V13.6036H3.25V13.8536H3.5ZM4.75 13.8536H5V13.6036H4.75V13.8536ZM4.75 6.14648V6.39648H5V6.14648H4.75ZM3.5 6.14648H3.25V6.39648H3.5V6.14648ZM11.8394 14.009L11.6602 13.8346L11.6602 13.8346L11.8394 14.009ZM11.8394 14.9172L12.0185 14.7428L12.0183 14.7426L11.8394 14.9172ZM15.1162 10.6423L15.2954 10.8167L15.7084 10.3923H15.1162V10.6423ZM1.625 9.35774V9.10774H1.62498L1.625 9.35774ZM15.1162 9.35774V9.60774H15.7084L15.2954 9.18338L15.1162 9.35774ZM11.8394 5.99039L12.0185 5.81604L12.0183 5.8158L11.8394 5.99039ZM11.8394 5.08227L12.0185 5.25662L12.0188 5.25639L11.8394 5.08227ZM12.7231 5.08227L12.5437 5.25639L12.544 5.25662L12.7231 5.08227ZM17.035 9.51319L17.2142 9.33883L17.2142 9.33883L17.035 9.51319ZM17.2119 9.99936L16.9622 9.98684L16.9615 9.99938L16.9622 10.0119L17.2119 9.99936ZM17.035 10.4856L16.8558 10.3112L16.8558 10.3112L17.035 10.4856ZM12.7231 14.9172L12.544 14.7428L12.5437 14.743L12.7231 14.9172ZM18.5 0.758423H6V1.25842H18.5V0.758423ZM21.25 3.57745C21.25 2.0271 20.0251 0.758423 18.5 0.758423V1.25842C19.7362 1.25842 20.75 2.29032 20.75 3.57745H21.25ZM21.25 16.4226V3.57745H20.75V16.4226H21.25ZM18.5 19.2416C20.0251 19.2416 21.25 17.973 21.25 16.4226H20.75C20.75 17.7097 19.7362 18.7416 18.5 18.7416V19.2416ZM6 19.2416H18.5V18.7416H6V19.2416ZM3.25 16.4226C3.25 17.973 4.47493 19.2416 6 19.2416V18.7416C4.76383 18.7416 3.75 17.7097 3.75 16.4226H3.25ZM3.25 13.8536V16.4226H3.75V13.8536H3.25ZM4.75 13.6036H3.5V14.1036H4.75V13.6036ZM5 16.4226V13.8536H4.5V16.4226H5ZM6 17.4571C5.45383 17.4571 5 17.0007 5 16.4226H4.5C4.5 17.2639 5.16493 17.9571 6 17.9571V17.4571ZM18.5 17.4571H6V17.9571H18.5V17.4571ZM19.5 16.4226C19.5 17.0001 19.0461 17.4571 18.5 17.4571V17.9571C19.3351 17.9571 20 17.2632 20 16.4226H19.5ZM19.5 3.57745V16.4226H20V3.57745H19.5ZM18.5 2.54294C19.0461 2.54294 19.5 2.99993 19.5 3.57745H20C20 2.73687 19.3351 2.04294 18.5 2.04294V2.54294ZM6 2.54294H18.5V2.04294H6V2.54294ZM5 3.57745C5 2.99993 5.45391 2.54294 6 2.54294V2.04294C5.16485 2.04294 4.5 2.73687 4.5 3.57745H5ZM5 6.14648V3.57745H4.5V6.14648H5ZM3.5 6.39648H4.75V5.89648H3.5V6.39648ZM3.25 3.57745V6.14648H3.75V3.57745H3.25ZM6 0.758423C4.47493 0.758423 3.25 2.0271 3.25 3.57745H3.75C3.75 2.29032 4.76383 1.25842 6 1.25842V0.758423ZM11.6602 13.8346C11.3215 14.1827 11.3212 14.744 11.6604 15.0917L12.0183 14.7426C11.8688 14.5893 11.8685 14.3376 12.0186 14.1833L11.6602 13.8346ZM14.9371 10.4679L11.6602 13.8346L12.0185 14.1834L15.2954 10.8167L14.9371 10.4679ZM1.625 10.8923H15.1162V10.3923H1.625V10.8923ZM0.75 10C0.75 10.4862 1.13555 10.8923 1.625 10.8923V10.3923C1.42445 10.3923 1.25 10.2229 1.25 10H0.75ZM1.62498 9.10774C1.13555 9.10778 0.75 9.51389 0.75 10H1.25C1.25 9.77711 1.42445 9.60776 1.62502 9.60774L1.62498 9.10774ZM15.1162 9.10774H1.625V9.60774H15.1162V9.10774ZM11.6602 6.16475L14.9371 9.53209L15.2954 9.18338L12.0185 5.81604L11.6602 6.16475ZM11.6602 4.90791C11.3215 5.25596 11.3212 5.81729 11.6604 6.16499L12.0183 5.8158C11.8688 5.66259 11.8685 5.41083 12.0185 5.25662L11.6602 4.90791ZM12.9025 4.90814C12.5606 4.55585 12.0019 4.55585 11.66 4.90814L12.0188 5.25639C12.1643 5.10643 12.3982 5.10643 12.5437 5.25639L12.9025 4.90814ZM17.2142 9.33883L12.9023 4.90791L12.544 5.25662L16.8558 9.68754L17.2142 9.33883ZM17.4615 10.0119C17.4734 9.77601 17.3985 9.52823 17.2142 9.33883L16.8558 9.68754C16.9315 9.76533 16.9679 9.87204 16.9622 9.98684L17.4615 10.0119ZM17.2142 10.6599C17.3986 10.4704 17.4734 10.222 17.4615 9.98679L16.9622 10.0119C16.9679 10.1262 16.9315 10.2335 16.8558 10.3112L17.2142 10.6599ZM12.9023 15.0915L17.2142 10.6599L16.8558 10.3112L12.544 14.7428L12.9023 15.0915ZM11.6602 15.0915C12.0027 15.4434 12.5604 15.4437 12.9025 15.0913L12.5437 14.743C12.3983 14.8929 12.1649 14.8932 12.0185 14.7428L11.6602 15.0915Z"
+              fill="#2148B1" />
+    </svg>
+<form action="/Account/SignOut" class="navbar-right" id="logoutForm" method="post"><input name="__RequestVerificationToken" type="hidden" value="9uqlfDtEH2Tp1iy1qwKiEO9tKBSZbvc-RO5pxdIxYMwbTNjRP56I0EyZnbpvG60KRb-vdbcYfYqTtbhECX_1OO5oFYHf0Q1Lt4UQuAtFUlTM9Oftzi3hONf7w6OQqsdnTKsI7XINxwD--iTHG8xa-g2" />            <a href="javascript:document.getElementById('logoutForm').submit()">Выход</a>
+</form>    
+</li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>
+
+
+
+
+    <section class="registerProcurement">
+        <div class="wrapper">
+            <div class="page">
+                <div class="page__content full-width">
+                    
+
+
+<script src="/bundles/applicationeditviewmodels?v=4Dx9iY7GDOIBh-bzi0DDC-lOQwMPqaAM3_a8qkAUqdk1"></script>
+
+
+<h1>Предложение на закупку № 694083 На поставку хозяйственных товаров</h1>
+
+<div class="applicationform form-stripped">
+
+    <div>
+        <input type="hidden" value=937520 data-bind="initializeValue: pageVM.Id, value: pageVM.Id" />
+    </div>
+
+    <h2>Информация о предмете закупки</h2>
+
+    <div contenteditable="false">
+        <table class="info-table width-100">
+            <tbody>
+                <tr>
+                    <td><label for="TradeName">Наименование</label></td>
+                    <td>На поставку хозяйственных товаров</td>
+                </tr>
+                <tr>
+                    <td><label for="InitialPrice">НМЦК, руб.</label></td>
+
+                    <td>14000,00</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="scroll-body">
+    <table class="stripped-table">
+        <thead class="scroll-head">
+            <tr>
+                <th>№</th>
+                <th>Наименование товара, работ, услуг</th>
+                <th>Код классификатора</th>
+                <th>Единицы измерения</th>
+                <th>Количество</th>
+                <th class="required">Стоимость единицы продукции</th>
+                <th>Стоимость поставляемого товара, выполняемых работ, оказываемых услуг</th>
+            </tr>
+        </thead>
+
+        <tbody data-bind="foreach: koVMs.pageVM.Products">
+        <tr>
+            <td data-bind="text: PositionNumber"></td>
+            <td data-bind="text: Name"></td>
+            <td data-bind="text: ClassificatorDescription"></td>
+            <td data-bind="text: OkeiDescription"></td>
+            <td data-bind="text: Quantity"></td>
+            <td>
+                <div>
+                    <input class="embedded-in-grid-cell" data-bind="value: Price" data-val="true" data-val-number="The field Цена must be a number." data-validation="decimal" id="Price" name="Price" type="text" value="" />
+                </div>
+            </td>
+            <td data-bind="text: DisplayedSumm"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+    <table class="info-table width-100">
+        <tbody>
+            <tr>
+                <td><label class="required" for="Price">Цена</label></td>
+                <td>
+                    <input data-bind="initializeValue: pageVM.Price, value: pageVM.Price" data-val="true" data-val-number="The field Цена must be a number." data-validation="decimal" disabled="True" id="Price" name="Price" type="text" value="" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-grey" href="/Trade">Перейти к закупкам</a>
+    <button data-bind="click: pageVM.editPublished" class="btn btn-grey">Сохранить</button>
+</div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <!-- Footer Block -->
+<div class="footer">
+    <div class="footer__columns">
+        <div class="column copyright">
+            ©2019, <a class="footer_link" href="http://zakaz-mo.mosreg.ru/">Комитет по конкурентной политике Московской области</a>
+            <div class="social">
+                <ul>
+                    <li>
+                        <a href="https://www.facebook.com/KomkonMO" target="_blank">
+                            <span class="icon social-icon facebook">facebook</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.instagram.com/kkp_mo/" target="_blank">
+                            <span class="icon social-icon instagram">instagram</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/rctmo" target="_blank">
+                            <span class="icon social-icon twitter">twitter</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://vk.com/kkp_mo" target="_blank">
+                            <span class="icon social-icon vk">vkontakte</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="column">
+            <ul>
+                <li>
+                    <a href="/Info" class="footer_link">Информационные и справочные материалы</a>
+                </li>
+            </ul>
+        </div>
+        <div class="column">
+            <ul>
+                <li>
+                    <a href="http://easuz.mosreg.ru/" target="_blank" class="footer_link">Портал ЕАСУЗ МО</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+    </footer>
+
+    
+    <script type="text/javascript">
+        var vmApplication = new ApplicationEditVm();
+        var mapping = {
+           'Products': {
+                create: function(options) {
+                    if (options.data == null)
+                        return null;
+                    var product = new productVM();
+                    product.init(
+                            options.data.OkeiCode,
+                            options.data.OkeiDescription,
+                            options.data.ClassificatorCode,
+                            options.data.ClassificatorDescription,
+                            options.data.ClassificatorType,
+                            options.data.Quantity,
+                            options.data.Name,
+                            options.data.Price,
+                        options.data.PositionNumber,
+                        options.data.ExternalId,
+                            options.data.Id);
+                    return product;
+                }
+            }
+        };
+        ko.mapping.fromJSON('{\"Id\":937520,\"TradeId\":694083,\"TradeName\":\"На поставку хозяйственных товаров\",\"FillingApplicationEndDate\":\"2019-05-12T21:00:00Z\",\"PlanedDealSignDate\":\"2019-05-15T00:00:00Z\",\"InitialPrice\":14000.00,\"Products\":[{\"Id\":2633693,\"PositionNumber\":1,\"Name\":\"\\\"САНОКС - гель \\\" чистящее ср-во д/унитаза 750 мл (Аист)\",\"ClassificatorCode\":\"01.21.03.6264\",\"ClassificatorType\":10,\"ClassificatorDescription\":\"01.21.03.6264\",\"OkeiCode\":\"796\",\"OkeiDescription\":\"Штука\",\"Quantity\":25.00000000000,\"Price\":57.90,\"Summ\":1447.50,\"ExternalId\":180893962},{\"Id\":2633694,\"PositionNumber\":2,\"Name\":\"Доместос 1л универсальное чист, ср-во\",\"ClassificatorCode\":\"01.10.01.23\",\"ClassificatorType\":10,\"ClassificatorDescription\":\"01.10.01.23\",\"OkeiCode\":\"796\",\"OkeiDescription\":\"Штука\",\"Quantity\":20.00000000000,\"Price\":137.00,\"Summ\":2740.00,\"ExternalId\":180893965},{\"Id\":2633695,\"PositionNumber\":3,\"Name\":\"Моющее ср-во \\\"Sorti - бальзам Алоэ Вера\\\" 500 мл\",\"ClassificatorCode\":\"01.21.03.6264\",\"ClassificatorType\":10,\"ClassificatorDescription\":\"01.21.03.6264\",\"OkeiCode\":\"796\",\"OkeiDescription\":\"Штука\",\"Quantity\":85.00000000000,\"Price\":44.00,\"Summ\":3740.00,\"ExternalId\":180893992},{\"Id\":2633696,\"PositionNumber\":4,\"Name\":\"Туалетное мыло детское 90 гр в обертке Н.К.\",\"ClassificatorCode\":\"01.10.02.02.07.01\",\"ClassificatorType\":10,\"ClassificatorDescription\":\"01.10.02.02.07.01\",\"OkeiCode\":\"796\",\"OkeiDescription\":\"Штука\",\"Quantity\":70.00000000000,\"Price\":15.00,\"Summ\":1050.00,\"ExternalId\":180894305},{\"Id\":2633697,\"PositionNumber\":5,\"Name\":\"Туалетная бумага \\\"1-2 Pro\\\" 2-х слойная 4 рулона в упаковке, белая\",\"ClassificatorCode\":\"01.10.02.01.05\",\"ClassificatorType\":10,\"ClassificatorDescription\":\"01.10.02.01.05\",\"OkeiCode\":\"796\",\"OkeiDescription\":\"Штука\",\"Quantity\":40.00000000000,\"Price\":59.00,\"Summ\":2360.00,\"ExternalId\":180894306},{\"Id\":2633698,\"PositionNumber\":6,\"Name\":\"Моющ.ср-во д/пола \\\"Золушка\\\" 500мл\",\"ClassificatorCode\":\"01.21.03.6264\",\"ClassificatorType\":10,\"ClassificatorDescription\":\"01.21.03.6264\",\"OkeiCode\":\"796\",\"OkeiDescription\":\"Штука\",\"Quantity\":25.00000000000,\"Price\":40.00,\"Summ\":1000.00,\"ExternalId\":180894309},{\"Id\":2633699,\"PositionNumber\":7,\"Name\":\"Белизна 1 литр \\\"1-2 Pro\\\"\",\"ClassificatorCode\":\"01.10.01.23\",\"ClassificatorType\":10,\"ClassificatorDescription\":\"01.10.01.23\",\"OkeiCode\":\"796\",\"OkeiDescription\":\"Штука\",\"Quantity\":45.00000000000,\"Price\":36.00,\"Summ\":1620.00,\"ExternalId\":180895440}],\"Price\":null}', mapping, vmApplication);
+
+        koVMs.pageVM = vmApplication;
+        vmApplication.subscribeProducts();
+    </script>
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/ru.js"></script>
+<script type="text/javascript">
+
+
+    ko.bindingHandlers.dateString = {
+        update: function (element, valueAccessor, allBindingsAccessor, viewModel) {
+            var value = valueAccessor(),
+                allBindings = allBindingsAccessor();
+            var valueUnwrapped = ko.utils.unwrapObservable(value);
+            var pattern = allBindings.datePattern || 'mmmm d, yyyy';
+            if (valueUnwrapped == undefined || valueUnwrapped == null) {
+                $(element).text("");
+            }
+            else {
+                var date = moment(valueUnwrapped, "YYYY-MM-DDTHH:mm:ss"); //new Date(Date.fromISO(valueUnwrapped));
+                $(element).text(moment(date).format(pattern));
+            }
+        }
+    }
+
+    ko.bindingHandlers.number = {
+        update: function(element, valueAccessor, allBindingsAccessor) {
+            var defaults = ko.bindingHandlers.number.defaults,
+                aba = allBindingsAccessor,
+                unwrap = ko.utils.unwrapObservable,
+                value = unwrap(valueAccessor()) || valueAccessor(),
+                result = '',
+                numarray;
+
+            var	separator = unwrap(aba().separator) || defaults.separator,
+                decimal = unwrap(aba().decimal) || defaults.decimal,
+                precision = unwrap(aba().precision) || defaults.precision,
+                symbol = unwrap(aba().symbol) || defaults.symbol,
+                after = unwrap(aba().after) || defaults.after;
+
+            value = parseFloat(value) || 0;
+
+            if (precision > 0)
+                value = value.toFixed(precision)
+
+            numarray = value.toString().split('.');
+
+            for (var i = 0; i < numarray.length; i++) {
+                if (i == 0) {
+                    result += numarray[i].replace(/(\d)(?=(\d\d\d)+(?!\d))/g,'$1'+separator);
+                } else {
+                    result += decimal + numarray[i];
+                }
+            }
+
+            result = (after) ? result += symbol : symbol + result;
+
+            ko.bindingHandlers.text.update(element, function() { return result; });
+        },
+        defaults: {
+            separator: ',',
+            decimal: '.',
+            precision: 0,
+            symbol: '',
+            after: false
+        }
+    };
+
+
+
+    ko.applyBindings(koVMs);
+    $(document).mouseup(function (e) {
+        var container = $(".wg-selectbox .options");
+
+        if (!container.is(e.target) // if the target of the click isn't the container...
+            && container.has(e.target).length === 0) // ... nor a descendant of the container
+        {
+            container.hide();
+        }
+    });
+</script>
+
+
+
+    <div id="main-menu"></div>
+
+    <script>
+
+        $('.leftBlock__burger-line').click(function(){
+            $('.header__leftMenu').fadeIn(200).css({display: 'flex'}); 
+            $('.overlay').show();  
+        });
+    
+        $('.burgerСlose, .overlay').click(function(){
+            $('.header__leftMenu, .MenuMoscowRegion, .overlay').hide();
+        }); 
+
+        $('.leftSearch__button').click(function(){   
+            $('.MenuMoscowRegion').fadeIn(200);   
+        });
+
+        $(".dropdown__clickText").on("click", function (e) {
+            if ($(this).hasClass("open")) {
+                e.stopPropagation();
+                $(this).closest('li').find('.dropdownMenu').fadeOut(100);
+                $(this).removeClass('open');
+            } else {
+                $(this).closest('li').find('.dropdownMenu').fadeIn(100);
+                $(this).addClass('open');
+            }
+        });
+
+        $(document).on('click', function (e) {
+            var div = $(".header .leftBlock__list .dropdown");
+            var dropdownMenu = $(div).find(".dropdownMenu");
+
+            if (!div.is(e.target) && div.has(e.target).length === 0 && dropdownMenu.css('display') !== 'none') {
+                div.find(".dropdownMenu").fadeOut(100);
+                $(".dropdown__clickText").removeClass("open");
+            }
+        });
+    </script>
+
+</body>
+</html>
+
+
+

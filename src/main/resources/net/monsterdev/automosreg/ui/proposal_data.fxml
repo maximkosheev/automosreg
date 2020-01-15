@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="245.0" prefWidth="403.0" spacing="5.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.monsterdev.automosreg.ui.ProposalController">
+   <children>
+      <Label text="Минимальное предложение цены (МПЦ) (р.)*" VBox.vgrow="NEVER" />
+      <TextField fx:id="edtMinTradeVal" promptText="МПЦ" VBox.vgrow="NEVER" />
+      <Label text="Начальное предложение цены (р.)" />
+      <Label text="Если не задано, то используется НМЦ" />
+      <TextField fx:id="edtStartTradeVal" promptText="Начальная цена" />
+      <Label text="Время активации (мин.)" />
+      <Label text="(если не задано, то заявка активируется сразу)" />
+      <TextField fx:id="edtActivateTime" promptText="Время активации" />
+      <HBox alignment="CENTER_RIGHT" prefHeight="62.0" prefWidth="393.0" spacing="5.0" VBox.vgrow="NEVER">
+         <children>
+            <Button fx:id="btnOk" defaultButton="true" mnemonicParsing="false" onAction="#onOk" text="Принять" />
+            <Button fx:id="btnCancel" cancelButton="true" mnemonicParsing="false" onAction="#onCancel" text="Отмена" />
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</VBox>

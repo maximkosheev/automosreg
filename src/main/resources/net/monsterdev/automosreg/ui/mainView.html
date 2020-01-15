@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link href="style.css" rel="stylesheet" media="all">
+  <script src="jquery/jquery.js"></script>
+</head>
+<body>
+<div class="content-wrapper">
+  <table class="table proposals-table" id="tblProposals">
+    <thead>
+    <tr class="table-header">
+      <th class="left-cell"><input type="checkbox"/></th>
+      <th style="width: 88px">
+        <div>Номер закупки</div>
+      </th>
+      <th style="width: 333px">
+        <div>Наименование закупки</div>
+      </th>
+      <th style="width: 140px">
+        <div>Дата и время начала подачи предрожений</div>
+      </th>
+      <th style="width: 167px">
+        <div>Дата и время окончания подачи предложений</div>
+      </th>
+      <th>
+        <div>Статус предложения</div>
+      </th>
+      <th>
+        <div>НМЦ</div>
+      </th>
+      <th>
+        <div>Порог</div>
+      </th>
+      <th>
+        <div>Кол-во предложений</div>
+      </th>
+      <th>
+        <div>Текущее</div>
+      </th>
+      <th>
+        <div>Цена победителя</div>
+      </th>
+      <th style="width: 50px">
+        <div></div>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+</div>
+</body>
+<script type="text/javascript">
+  mainView = {
+
+    clearProposals: function () {
+      $("#tblProposals > tbody").empty();
+    },
+
+    showProposals: function (proposals) {
+      for (var i = 0; i < proposals.size(); i++) {
+        var proposalItem = proposals.get(i);
+        $("#tblProposals > tbody:last-child").append('<tr class="proposal-item ' + proposalItem.getCSSClass() + '">' +
+            '<td class="left-cell"><input type="checkbox" name="sel" data-val="' + proposalItem.getTradeId()
+            + '"/></td>' +
+            '<td>' + proposalItem.getTradeId() + '</td>' +
+            '<td>' + proposalItem.getTradeName() + '</td>' +
+            '<td>' + proposalItem.getStartTradesDT() + '</td>' +
+            '<td>' + proposalItem.getFinishTradesDT() + '</td>' +
+            '<td>' + proposalItem.getStatus().getDescription() + '</td>' +
+            '<td>' + proposalItem.getNmc().toString() + '</td>' +
+            '<td>' + proposalItem.getLimit().toString() + '</td>' +
+            '<td>' + proposalItem.getProposalsCount() + '</td>' +
+            '<td>' + proposalItem.getCurrentPrice() + '</td>' +
+            '<td>' + proposalItem.getWinPrice() + '</td>' +
+            '<td>Действия</td>' +
+            '</tr>');
+      }
+    },
+
+    getSelected: function () {
+      var result = new Array();
+      $("input:checkbox[name=sel]:checked").each(function () {
+        result.push($(this).attr("data-val"));
+      });
+      return result;
+    }
+  };
+</script>
+</html>

@@ -1,0 +1,26 @@
+{
+  "Id": 1563647,
+  "TradeId": 983392,
+  "TradeName": "поставка товара (универсальная лестница)",
+  "FillingApplicationEndDate": "2019-12-08T11:34:55.93Z",
+  "PlanedDealSignDate": "2019-12-09T00:00:00Z",
+  "InitialPrice": 37000,
+  "Products": [
+    {
+      "Id": 5227775,
+      "PositionNumber": 1,
+      "Name": "Лестница алюминиевая",
+      "ClassificatorCode": "01.22.02.01.01.09",
+      "ClassificatorType": 10,
+      "ClassificatorDescription": "01.22.02.01.01.09",
+      "OkeiCode": "796",
+      "OkeiDescription": "Штука",
+      "Quantity": 1,
+      "Price": 37000,
+      "Summ": 37000,
+      "ExternalId": 226597981,
+      "Okpd2Code": null
+    }
+  ],
+  "Price": null
+}
