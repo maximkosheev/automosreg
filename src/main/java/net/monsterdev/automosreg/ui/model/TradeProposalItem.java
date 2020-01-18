@@ -130,24 +130,24 @@ public class TradeProposalItem {
    */
   public String getCSSClass() {
     if (trade.getStatus() == TradeStatus.ARCHIVED) {
-      return "archived";
+      return "trade-archived";
     } else if (isSoured()) {
-      return "soured";
+      return "trade-soured";
     } else if (!isFinished()) {
       if (trade.getProposal() == null) {
-        return "empty";
+        return "trade-no-proposal";
       } else {
-        return "default";
+        return "trade-default";
       }
     } else {
       // предложение так и не было подано
       if (trade.getProposal() == null) {
-        return "lose";
+        return "trade-lose";
       } else {
         if (trade.getProposal().getId().equals(trade.getBestProposalId())) {
-          return "win";
+          return "trade-win";
         } else {
-          return "lose";
+          return "trade-lose";
         }
       }
     }

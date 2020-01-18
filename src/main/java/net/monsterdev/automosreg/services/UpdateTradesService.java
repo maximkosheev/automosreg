@@ -293,9 +293,8 @@ public class UpdateTradesService extends Thread {
             } else if (dbTrade.getProposal() != null) {
               // получаем статус предложения по данной заявке
               dbTrade.getProposal().setStatus(getProposalStatus(dbTrade.getProposal()));
-              // Пока по закупке ведутся торги, обновляем информацию о лучшем предложении
-              if (dbTrade.getStatus() == TradeStatus.SUGGESTIONS
-                  && dbTrade.getProposal().getStatus() == ProposalStatus.ACTIVE) {
+              // Обновляем информацию по лучшему предложению.
+              if (dbTrade.getProposal().getStatus() == ProposalStatus.ACTIVE) {
                 BestProposalInfoDto bestProposalInfo = getBestProposal(dbTrade);
                 dbTrade.setProposalsCount(bestProposalInfo.getTotalCount());
                 dbTrade.setBestProposalId(bestProposalInfo.getBestProposalId());

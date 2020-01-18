@@ -6,49 +6,73 @@
   <script src="jquery/jquery.js"></script>
 </head>
 <body>
-<div class="content-wrapper">
-  <table class="table proposals-table" id="tblProposals">
-    <thead>
-    <tr class="table-header">
-      <th class="left-cell"><input type="checkbox"/></th>
-      <th style="width: 88px">
-        <div>Номер закупки</div>
-      </th>
-      <th style="width: 333px">
-        <div>Наименование закупки</div>
-      </th>
-      <th style="width: 140px">
-        <div>Дата и время начала подачи предрожений</div>
-      </th>
-      <th style="width: 167px">
-        <div>Дата и время окончания подачи предложений</div>
-      </th>
-      <th>
-        <div>Статус предложения</div>
-      </th>
-      <th>
-        <div>НМЦ</div>
-      </th>
-      <th>
-        <div>Порог</div>
-      </th>
-      <th>
-        <div>Кол-во предложений</div>
-      </th>
-      <th>
-        <div>Текущее</div>
-      </th>
-      <th>
-        <div>Цена победителя</div>
-      </th>
-      <th style="width: 50px">
-        <div></div>
-      </th>
-    </tr>
-    </thead>
-    <tbody>
-    </tbody>
-  </table>
+<div class="wrapper">
+  <div class="content-wrapper">
+    <table class="table proposals-table" id="tblProposals">
+      <thead>
+      <tr class="table-header">
+        <th class="left-cell"><input type="checkbox"/></th>
+        <th style="width: 88px">
+          <div>Номер закупки</div>
+        </th>
+        <th style="width: 333px">
+          <div>Наименование закупки</div>
+        </th>
+        <th style="width: 140px">
+          <div>Дата и время начала подачи предрожений</div>
+        </th>
+        <th style="width: 167px">
+          <div>Дата и время окончания подачи предложений</div>
+        </th>
+        <th>
+          <div>Статус предложения</div>
+        </th>
+        <th>
+          <div>НМЦ</div>
+        </th>
+        <th>
+          <div>Порог</div>
+        </th>
+        <th>
+          <div>Кол-во предложений</div>
+        </th>
+        <th>
+          <div>Текущее</div>
+        </th>
+        <th>
+          <div>Цена победителя</div>
+        </th>
+        <th style="width: 50px">
+          <div></div>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+  <div class="footer">
+    <div class="legend-row">
+      <div class="legend-item">
+        <div class="legend-square trade-default"></div>
+        <span>&nbsp;-&nbsp;Ведется торг</span></div>
+      <div class="legend-item">
+        <div class="legend-square trade-no-proposal"></div>
+        <span>&nbsp;-&nbsp;Заявка еще не подана</span></div>
+      <div class="legend-item">
+        <div class="legend-square trade-lose"></div>
+        <span>&nbsp;-&nbsp;Торг проигран</span></div>
+      <div class="legend-item">
+        <div class="legend-square trade-win"></div>
+        <span>&nbsp;-&nbsp;Торг выигран</span></div>
+      <div class="legend-item">
+        <div class="legend-square trade-soured"></div>
+        <span>&nbsp;-&nbsp;Ждет обновления</span></div>
+      <div class="legend-item">
+        <div class="legend-square trade-archived"></div>
+        <span>&nbsp;-&nbsp;Перемещена в архив</span></div>
+    </div>
+  </div>
 </div>
 </body>
 <script type="text/javascript">

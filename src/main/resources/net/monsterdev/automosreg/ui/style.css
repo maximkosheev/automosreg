@@ -1,69 +1,107 @@
+html,
+body {
+  height: 100%;
+}
+
+.wrapper {
+  position: relative;
+  min-height: 100%;
+}
+
 .content-wrapper {
+  padding-bottom: 35px;
   width: 100%;
 }
 
+.footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 30px;
+}
+
 .proposals-table {
-    border-spacing: 0;
-    border-collapse: collapse;
-    width: 100%;
+  border-spacing: 0;
+  border-collapse: collapse;
+  width: 100%;
 }
 
 .proposals-table .table-header th {
-    border: 1px solid #b2b2b2;
-    border-left: 1px solid transparent;
-    background-color: #efeff0;
-    vertical-align: middle;
-    text-align: center;
-    font-family: Trebuchet MS,Tahoma,Verdana,Arial,sans-serif;
-    font-size: 15px;
+  border: 1px solid #b2b2b2;
+  border-left: 1px solid transparent;
+  background-color: #efeff0;
+  vertical-align: middle;
+  text-align: center;
+  font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif;
+  font-size: 15px;
 }
 
 .proposals-table th div {
-    padding: 7px;
-    line-height: 17px;
-    overflow: hidden;
-    position: relative;
-    margin: .1em 0 .1em 0;
-    cursor: pointer;
+  padding: 7px;
+  line-height: 17px;
+  overflow: hidden;
+  position: relative;
+  margin: .1em 0 .1em 0;
+  cursor: pointer;
 }
 
 th.left-cell, td.left-cell {
-    border-left: 1px solid #b2b2b2;
+  border-left: 1px solid #b2b2b2;
 }
 
 .proposals-table .proposal-item td {
-    border-color: #b2b2b2;
-    white-space: normal;
-    line-height: 19px;
-    word-wrap: break-word;
-    word-break: normal;
-    padding: 7px 9px;
-    border-right: 1px #b2b2b2 solid;
-    border-bottom: 1px #b2b2b2 solid;
-    vertical-align: top;
-    text-align: left;
+  border-color: #b2b2b2;
+  white-space: normal;
+  line-height: 19px;
+  word-wrap: break-word;
+  word-break: normal;
+  padding: 7px 9px;
+  border-right: 1px #b2b2b2 solid;
+  border-bottom: 1px #b2b2b2 solid;
+  vertical-align: top;
+  text-align: left;
 }
 
-.proposal-item.default {
-    background-color: white;
+.trade-default {
+  background-color: white;
 }
 
-.proposal-item.empty {
-    background-color: yellow;
+.trade-no-proposal {
+  background-color: yellow;
 }
 
-.proposal-item.win {
-    background-color: green;
+.trade-win {
+  background-color: green;
 }
 
-.proposal-item.lose {
-    background-color: red;
+.trade-lose {
+  background-color: red;
 }
 
-.proposal-item.archived {
-    background-color: dimgray;
+.trade-archived {
+  background-color: dimgray;
 }
 
-.proposal-item.soured {
-    background-color: lightgray;
+.trade-soured {
+  background-color: lightgray;
+}
+
+.legend-row {
+}
+
+footer {
+  height: 25px;
+}
+
+.legend-item {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.legend-square {
+  width: 20px;
+  height: 20px;
+  float: left;
+  border: solid 1px black;
 }
