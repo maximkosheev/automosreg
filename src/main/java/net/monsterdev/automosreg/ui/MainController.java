@@ -1,5 +1,6 @@
 package net.monsterdev.automosreg.ui;
 
+import com.sun.deploy.uitoolkit.impl.fx.HostServicesFactory;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -15,6 +16,8 @@ import java.util.stream.Collectors;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Application;
+import javafx.application.HostServices;
 import javafx.beans.value.ChangeListener;
 import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
@@ -157,6 +160,8 @@ public class MainController extends AbstractUIController implements WindowContro
         refreshProposals(filterOptions);
       }
     });
+    JSObject window = (JSObject) webEngine.executeScript("window");
+    window.setMember("app", this);
 
     cmbItemsPerPage.getItems().addAll(5, 10, 20, 50, 100);
     cmbItemsPerPage.setValue(10);
@@ -222,8 +227,7 @@ public class MainController extends AbstractUIController implements WindowContro
   }
 
   /**
-   * Выполняет поиск предложений в БД, удовлетворяющих параметрам фильтра и
-   * отображает их на экране
+   * Выполняет поиск предложений в БД, удовлетворяющих параметрам фильтра и отображает их на экране
    */
   private void refreshProposals(Map<String, Object> filterOptions) {
     lockUI();
@@ -291,7 +295,8 @@ public class MainController extends AbstractUIController implements WindowContro
         trade.setStatus(TradeStatus.valueOf(tradeInfo.getTradeState()));
         trade.setActivateTime(proposalData.getActivateTime());
         trade.setMinTradeVal(proposalData.getMinTradeVal());
-        trade.setStartPrice(Objects.isNull(proposalData.getStartTradeVal()) ? tradeInfo.getInitialPrice() : proposalData.getStartTradeVal());
+        trade.setStartPrice(Objects.isNull(proposalData.getStartTradeVal()) ? tradeInfo.getInitialPrice()
+            : proposalData.getStartTradeVal());
         trade.getTradeProducts().addAll(productsService.getProductsForTrade(tradeInfo.getId()));
         userService.getCurrentUser().addTrade(trade);
       }
@@ -345,6 +350,15 @@ public class MainController extends AbstractUIController implements WindowContro
       doApplyFilter();
     } catch (Throwable t) {
       UIController.showErrorMessage(t.getMessage());
+    }
+  }
+
+  public void onOpenTradePage(Integer tradeId) {
+    if (tradeId != null) {
+      HostServicesFactory.getInstance(AutoMosreg.getInstance())
+          .showDocument("https://market.mosreg.ru/Trade/ViewTrade/" + tradeId);
+    } else {
+      UIController.showErrorMessage("Ошибка при попытке открыть окно браузера по данной закупке");
     }
   }
 

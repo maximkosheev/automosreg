@@ -29,7 +29,10 @@ public class AutoMosreg extends Application {
       db.stop();
       System.exit(0);
     });
+  }
 
+  public static AutoMosreg getInstance() {
+    return instance;
   }
 
   public static URL getResource(String name) {

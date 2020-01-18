@@ -88,7 +88,7 @@
         $("#tblProposals > tbody:last-child").append('<tr class="proposal-item ' + proposalItem.getCSSClass() + '">' +
             '<td class="left-cell"><input type="checkbox" name="sel" data-val="' + proposalItem.getTradeId()
             + '"/></td>' +
-            '<td>' + proposalItem.getTradeId() + '</td>' +
+            '<td>' + proposalItem.getTradeId() + '</a></td>' +
             '<td>' + proposalItem.getTradeName() + '</td>' +
             '<td>' + proposalItem.getStartTradesDT() + '</td>' +
             '<td>' + proposalItem.getFinishTradesDT() + '</td>' +
@@ -98,7 +98,7 @@
             '<td>' + proposalItem.getProposalsCount() + '</td>' +
             '<td>' + proposalItem.getCurrentPrice() + '</td>' +
             '<td>' + proposalItem.getWinPrice() + '</td>' +
-            '<td>Действия</td>' +
+            '<td><input type="button" value="Перейти" onclick="app.onOpenTradePage(' + proposalItem.getTradeId() + ')"/></td>' +
             '</tr>');
       }
     },
