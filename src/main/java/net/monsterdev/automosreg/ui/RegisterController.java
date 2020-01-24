@@ -12,7 +12,7 @@ import net.monsterdev.automosreg.domain.Document;
 import net.monsterdev.automosreg.domain.User;
 import net.monsterdev.automosreg.services.UserService;
 import net.monsterdev.automosreg.ui.control.DocumentListCell;
-import net.monsterdev.automosreg.utils.LincenceUtil;
+import net.monsterdev.automosreg.utils.LicenseUtil;
 import net.monsterdev.automosreg.utils.SpringFXMLLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -152,7 +152,7 @@ public class RegisterController extends AbstractUIController implements WindowCo
 
     @FXML
     private void onRegister(ActionEvent event) {
-        if (!LincenceUtil.check(userService.getCount() + 1)) {
+        if (LicenseUtil.check(userService.getCount() + 1L)) {
             UIController.showErrorMessage("Вы превысили ограничение по количеству пользователей,\n" +
                     "зарегистрированных в системе, установленное вашей лицензией.\n" +
                     "Обратитесь к диллеру для получения соответсвующей лицензии");

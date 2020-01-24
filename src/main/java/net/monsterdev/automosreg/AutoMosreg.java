@@ -1,9 +1,21 @@
 package net.monsterdev.automosreg;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.Reader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
+import net.monsterdev.automosreg.exceptions.AutoMosregException;
 import net.monsterdev.automosreg.ui.LoginController;
+import net.monsterdev.automosreg.utils.LicenseUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.h2.tools.Server;
@@ -56,6 +68,10 @@ public class AutoMosreg extends Application {
     System.setProperty("com.ibm.security.enableCRLDP", "true");
 
     try {
+      LOG.trace("Reading license data from file license.key");
+      Path licenseFilePath = Paths.get(System.getenv("APP_HOME")).resolve("bin").resolve("license.key");
+      String licenseData = new String(Files.readAllBytes(licenseFilePath), StandardCharsets.UTF_8);
+      LicenseUtil.load(licenseData);
       LOG.trace("Starting database...");
       db = Server.createTcpServer("-tcpAllowOthers", "-tcpPort", "9092", "-trace").start();
       LOG.trace("Database started at: " + db.getURL());
@@ -63,6 +79,10 @@ public class AutoMosreg extends Application {
       LOG.trace("Starting with trades update interval {}", work_thread_timeout);
       launch(args);
     } catch (SQLException ex) {
+      if (db != null)
+        db.stop();
+      ex.printStackTrace();
+    } catch (IOException | AutoMosregException ex) {
       ex.printStackTrace();
     }
   }
