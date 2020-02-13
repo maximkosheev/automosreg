@@ -1,5 +1,11 @@
 package net.monsterdev.automosreg.ui;
 
+import java.net.URL;
+import java.security.UnrecoverableKeyException;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -11,149 +17,152 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import net.monsterdev.automosreg.domain.User;
 import net.monsterdev.automosreg.events.LoginEvent;
 import net.monsterdev.automosreg.http.tasks.LoginTask;
 import net.monsterdev.automosreg.model.CertificateInfo;
-import net.monsterdev.automosreg.domain.User;
 import net.monsterdev.automosreg.services.CryptoService;
 import net.monsterdev.automosreg.services.UserService;
 import net.monsterdev.automosreg.ui.control.PasswordDialog;
 import net.monsterdev.automosreg.ui.control.WaitIndicator;
+import net.monsterdev.automosreg.utils.LicenseUtil;
 import net.monsterdev.automosreg.utils.SpringFXMLLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 
-import java.net.URL;
-import java.security.UnrecoverableKeyException;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.ResourceBundle;
-
 @Controller
 public class LoginController extends AbstractUIController implements WindowController {
-    @FXML
-    private StackPane rootPane;
-    @FXML
-    private GridPane wrapPane;
-    @FXML
-    ListView<User> lstUsers;
-    @FXML
-    Hyperlink lnkRegister;
-    @FXML
-    Button btnLogin;
-    @FXML
-    Button btnCancel;
-    private WaitIndicator waitIndicator;
 
-    @Autowired
-    private ApplicationContext applicationContext;
+  @FXML
+  private StackPane rootPane;
+  @FXML
+  private GridPane wrapPane;
+  @FXML
+  ListView<User> lstUsers;
+  @FXML
+  Hyperlink lnkRegister;
+  @FXML
+  Button btnLogin;
+  @FXML
+  Button btnCancel;
+  private WaitIndicator waitIndicator;
 
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private CryptoService cryptoService;
+  @Autowired
+  private ApplicationContext applicationContext;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        UIController.primaryStage().setTitle("AutoMosreg - Вход");
-        lstUsers.getItems().addAll(userService.findAll());
+  @Autowired
+  private UserService userService;
+  @Autowired
+  private CryptoService cryptoService;
 
-        btnCancel.setOnAction(event -> {
-            UIController.primaryStage().fireEvent(new WindowEvent(UIController.primaryStage(), WindowEvent.WINDOW_CLOSE_REQUEST));
-        });
-        getStage().addEventHandler(LoginEvent.LOGIN_SUCCESS, event -> {
-            userService.setCurrentUser(lstUsers.getSelectionModel().getSelectedItem());
-            MainController.showUI();
-        });
-        getStage().addEventHandler(LoginEvent.LOGIN_FAILED, event -> {
-            releaseUI();
-            UIController.showErrorMessage(event.getMessage());
-        });
-        waitIndicator = new WaitIndicator();
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+    UIController.primaryStage().setTitle("AutoMosreg - Вход");
+
+    if (!LicenseUtil.check(userService.getCount())) {
+      UIController.showErrorMessage("Превышено ограничение лицензии на количество пользователей");
+      return;
     }
+    lstUsers.getItems().addAll(userService.findAll());
 
-    @Override
-    public Stage getStage() {
-        return UIController.primaryStage();
+    btnCancel.setOnAction(event -> {
+      UIController.primaryStage()
+          .fireEvent(new WindowEvent(UIController.primaryStage(), WindowEvent.WINDOW_CLOSE_REQUEST));
+    });
+    getStage().addEventHandler(LoginEvent.LOGIN_SUCCESS, event -> {
+      userService.setCurrentUser(lstUsers.getSelectionModel().getSelectedItem());
+      MainController.showUI();
+    });
+    getStage().addEventHandler(LoginEvent.LOGIN_FAILED, event -> {
+      releaseUI();
+      UIController.showErrorMessage(event.getMessage());
+    });
+    waitIndicator = new WaitIndicator();
+  }
+
+  @Override
+  public Stage getStage() {
+    return UIController.primaryStage();
+  }
+
+  public static void showUI() {
+    try {
+      LoginController controller = (LoginController) SpringFXMLLoader.load("/net/monsterdev/automosreg/ui/login.fxml");
+      UIController.primaryStage().setTitle("AutoMosreg - Вход");
+      Scene loginScene = new Scene((Parent) controller.getView(), 600, 400);
+      UIController.primaryStage().setScene(loginScene);
+      UIController.primaryStage().show();
+    } catch (Exception e) {
+      UIController.showErrorMessage("Ошибка открытия открытия окна входа\n" +
+          "Переустановка приложения может решить проблему");
     }
+  }
 
-    public static void showUI() {
+  @FXML
+  private void onRegister(ActionEvent event) {
+    RegisterController.showUI();
+  }
+
+  private boolean loginToMarket(User user) {
+    CertificateInfo certInfo = null;
+    try {
+      certInfo = Objects.requireNonNull(cryptoService.getCertificateByHash(user.getCertHash()),
+          "Сертификат не найден. " +
+              "Возможно контейнер закрытого ключа не установлен. " +
+              "Установите контейнер закрытого ключа и перезапустите приложение.");
+
+      // Цикл до тех пор пока пользователь не введет корректный пароль для загрузки приватного ключа подписи
+      while (certInfo.getPrivateKey() == null) {
         try {
-            LoginController controller = (LoginController) SpringFXMLLoader.load("/net/monsterdev/automosreg/ui/login.fxml");
-            UIController.primaryStage().setTitle("AutoMosreg - Вход");
-            Scene loginScene = new Scene((Parent) controller.getView(), 600, 400);
-            UIController.primaryStage().setScene(loginScene);
-            UIController.primaryStage().show();
-        } catch (Exception e) {
-            UIController.showErrorMessage("Ошибка открытия открытия окна входа\n" +
-                    "Переустановка приложения может решить проблему");
+          certInfo.loadInfo();
+        } catch (UnrecoverableKeyException ex) {
+          PasswordDialog dlg = new PasswordDialog();
+          dlg.setHeaderText("Введите пароль для контейнера: " + certInfo.getAlias());
+          Optional<String> result = dlg.showAndWait();
+          if (result.isPresent()) {
+            certInfo.setPassword(result.get());
+          }
         }
+      }
+      LoginTask loginTask = new LoginTask(certInfo);
+      loginTask.setOnFailed(event -> {
+        releaseUI();
+        UIController.showErrorMessage(loginTask.getException().getMessage());
+      });
+      loginTask.setOnSucceeded(event -> {
+        userService.setCurrentUser(user);
+        MainController.showUI();
+      });
+      lockUI();
+      Thread loginThread = new Thread(loginTask);
+      applicationContext.getAutowireCapableBeanFactory().autowireBean(loginTask);
+      loginThread.start();
+    } catch (Exception ex) {
+      ex.printStackTrace();
+      UIController.showErrorMessage(ex.getMessage());
+      return false;
     }
+    return true;
+  }
 
-    @FXML
-    private void onRegister(ActionEvent event) {
-        RegisterController.showUI();
+  @FXML
+  private void onLogin(ActionEvent event) {
+    User selectedUser = lstUsers.getSelectionModel().getSelectedItem();
+    if (selectedUser == null) {
+      UIController.showErrorMessage("Необходимо выбрать пользователя из списка");
+      return;
     }
+    loginToMarket(selectedUser);
+  }
 
-    private boolean loginToMarket(User user) {
-        CertificateInfo certInfo = null;
-        try {
-            certInfo = Objects.requireNonNull(cryptoService.getCertificateByHash(user.getCertHash()),
-                    "Сертификат не найден. " +
-                            "Возможно контейнер закрытого ключа не установлен. " +
-                            "Установите контейнер закрытого ключа и перезапустите приложение.");
+  private void lockUI() {
+    wrapPane.setDisable(true);
+    rootPane.getChildren().add(waitIndicator);
+  }
 
-            // Цикл до тех пор пока пользователь не введет корректный пароль для загрузки приватного ключа подписи
-            while (certInfo.getPrivateKey() == null) {
-                try {
-                    certInfo.loadInfo();
-                } catch (UnrecoverableKeyException ex) {
-                    PasswordDialog dlg = new PasswordDialog();
-                    dlg.setHeaderText("Введите пароль для контейнера: " + certInfo.getAlias());
-                    Optional<String> result = dlg.showAndWait();
-                    if (result.isPresent())
-                        certInfo.setPassword(result.get());
-                }
-            }
-            LoginTask loginTask = new LoginTask(certInfo);
-            loginTask.setOnFailed(event -> {
-                releaseUI();
-                UIController.showErrorMessage(loginTask.getException().getMessage());
-            });
-            loginTask.setOnSucceeded(event -> {
-                userService.setCurrentUser(user);
-                MainController.showUI();
-            });
-            lockUI();
-            Thread loginThread = new Thread(loginTask);
-            applicationContext.getAutowireCapableBeanFactory().autowireBean(loginTask);
-            loginThread.start();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            UIController.showErrorMessage(ex.getMessage());
-            return false;
-        }
-        return true;
-    }
-
-    @FXML
-    private void onLogin(ActionEvent event) {
-        User selectedUser = lstUsers.getSelectionModel().getSelectedItem();
-        if (selectedUser == null) {
-            UIController.showErrorMessage("Необходимо выбрать пользователя из списка");
-            return;
-        }
-        loginToMarket(selectedUser);
-    }
-
-    private void lockUI() {
-        wrapPane.setDisable(true);
-        rootPane.getChildren().add(waitIndicator);
-    }
-
-    private void releaseUI() {
-        rootPane.getChildren().remove(waitIndicator);
-        wrapPane.setDisable(false);
-    }
+  private void releaseUI() {
+    rootPane.getChildren().remove(waitIndicator);
+    wrapPane.setDisable(false);
+  }
 }
